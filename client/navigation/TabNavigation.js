@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FooterTab } from "native-base";
-import NavigationTab from "../components/NavigationTab";
 
-const s = [2, 3];
+import NavigationTab from "../components/NavigationTab";
+import colors from "../constants/Colors";
+
 export default (TabNavigation = props => {
   console.log(props.activeTab);
   return (
     <FooterTab
       style={{
         borderTopWidth: 0.5,
-        borderTopColor: "#eeeeee",
-        paddingBottom: 30
+        borderTopColor: colors.tabNavBorderTop,
+        backgroundColor: colors.defaultBackgroundColor,
+        marginBottom: 20
       }}
     >
       {props.loggedIn ? (
@@ -50,7 +52,7 @@ export default (TabNavigation = props => {
       {props.loggedIn && (
         <NavigationTab
           onPress={props.onPress}
-          cartLength={props.cart.length}
+          cartLength={props.cart.length > 0 ? props.cart.length : null}
           cartItems={props.cart}
           navigateTo="cart"
           iconName="cart"

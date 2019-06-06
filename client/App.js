@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Container, Header, Content, Footer } from "native-base";
 import { AppLoading, Asset, Font, Icon } from "expo";
+import { getStatusBarHeight } from "react-native-status-bar-height";
 
 import AuthScreen from "./screens/AuthScreen";
 import CartScreen from "./screens/CartScreen";
@@ -18,11 +19,12 @@ import ShopScreen from "./screens/ShopScreen";
 import { height, width } from "./constants/Layout";
 import TabNavigation from "./navigation/TabNavigation";
 import HeaderCustom from "./components/HeaderCustom";
+import colors from "./constants/Colors";
 
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
-    activeTab: "auth",
+    activeTab: "profile",
     cart: [
       {
         id: 1,
@@ -40,7 +42,7 @@ export default class App extends React.Component {
         price: 15
       }
     ],
-    loggedIn: false
+    loggedIn: true
   };
 
   // componentWillMount() {
@@ -92,12 +94,23 @@ export default class App extends React.Component {
       return (
         <Container>
           {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <Header style={{ height: height * 0.1, backgroundColor: "#fafafa" }}>
+          <Header
+            style={{
+              backgroundColor: colors.defaultBackgroundColor,
+              paddingTop: getStatusBarHeight(),
+              height: 54 + getStatusBarHeight()
+            }}
+          >
             <HeaderCustom />
           </Header>
           <Content style={{ flex: 1 }}>{this.renderContent()}</Content>
 
-          <Footer style={{ height: height * 0.1, backgroundColor: "#fafafa" }}>
+          <Footer
+            style={{
+              height: Platform.OS === "ios" ? height * 0.1 : height * 0.15,
+              backgroundColor: colors.defaultBackgroundColor
+            }}
+          >
             <TabNavigation
               loggedIn={this.state.loggedIn}
               cart={this.state.cart}

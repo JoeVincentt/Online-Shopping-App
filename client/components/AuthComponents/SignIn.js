@@ -9,8 +9,8 @@ export default class SignIn extends Component {
   render() {
     return (
       <>
-        <Form>
-          <Item stackedLabel>
+        <Form style={{ marginVertical: 10 }}>
+          <Item stackedLabel last>
             <View style={styles.inputLabel}>
               <TitleText>Email</TitleText>
             </View>
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     paddingTop: 10
   },
   inputField: {
-    fontSize: 30,
     fontFamily: "sans-light"
   }
 });

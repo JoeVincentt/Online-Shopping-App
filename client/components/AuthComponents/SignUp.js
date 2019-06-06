@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     paddingTop: 10
   },
   inputField: {
-    fontSize: 30,
     fontFamily: "sans-light"
   }
 });

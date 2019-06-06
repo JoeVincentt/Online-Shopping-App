@@ -2,23 +2,32 @@ import React, { Component } from "react";
 import { Text, StyleSheet } from "react-native";
 import { Button, Icon, Badge } from "native-base";
 import { ContentLightText } from "../components/StyledText";
+import colors from "../constants/Colors";
+
 const Tab = props => {
   return (
     <Button
       onPress={() => props.onPress(props.navigateTo)}
-      style={props.active ? { height: "100%", borderRadius: 0 } : {}}
+      style={
+        props.active
+          ? {
+              height: "100%",
+              borderRadius: 0
+            }
+          : { paddingBottom: props.cartLength ? 15 : 0 }
+      }
       active={props.activeTab}
       badge
       vertical
     >
       {props.cartLength && (
-        <Badge style={{ backgroundColor: "#02FD8F" }}>
+        <Badge style={{ backgroundColor: colors.badgeColor }}>
           <Text>{props.cartLength}</Text>
         </Badge>
       )}
 
       <Icon
-        style={props.active ? { fontSize: 50, color: "#02EDFD" } : {}}
+        style={props.active ? { fontSize: 50, color: colors.secondary } : {}}
         name={props.iconName}
       />
       {props.active ? null : (
@@ -28,8 +37,3 @@ const Tab = props => {
   );
 };
 export default Tab;
-
-//styles
-const styles = StyleSheet.create({
-  tabTitle: { fontSize: 18, color: "white" }
-});
