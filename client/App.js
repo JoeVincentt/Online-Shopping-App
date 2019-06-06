@@ -1,11 +1,89 @@
-import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
-import AppNavigator from './navigation/AppNavigator';
+import React from "react";
+import {
+  Platform,
+  StatusBar,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity
+} from "react-native";
+import { Container, Header, Content, Footer } from "native-base";
+import { AppLoading, Asset, Font, Icon } from "expo";
+
+import AuthScreen from "./screens/AuthScreen";
+import CartScreen from "./screens/CartScreen";
+import FavoriteScreen from "./screens/FavoriteScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import ShopScreen from "./screens/ShopScreen";
+import {
+  MarijuanaText,
+  TitleText,
+  ContentBoldText,
+  ContentItalicText,
+  ContentLightText
+} from "./components/StyledText";
+import { height, width } from "./constants/Layout";
+import TabNavigation from "./navigation/TabNavigation";
+import HeaderCustom from "./components/HeaderCustom";
 
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
+    activeTab: "shop",
+    cart: [
+      {
+        id: 1,
+        product: "oil cbd",
+        price: 20
+      },
+      {
+        id: 2,
+        product: "oil cbd",
+        price: 10
+      },
+      {
+        id: 3,
+        product: "oil cbd",
+        price: 15
+      }
+    ],
+    loggedIn: false
+  };
+
+  componentWillMount() {
+    console.log("componentWillMount");
+  }
+  componentDidMount() {
+    console.log("componentDidMount");
+  }
+  componentWillUnmount() {
+    console.log("componentWillUnmount");
+  }
+
+  navigation = tabToNavigate => this.setState({ activeTab: tabToNavigate });
+
+  logIn = () => {
+    this.setState({ loggedIn: true });
+    this.navigation("shop");
+  };
+
+  renderContent = () => {
+    const { activeTab } = this.state;
+    if (activeTab === "auth") {
+      return <AuthScreen />;
+    }
+    if (activeTab === "profile") {
+      return <ProfileScreen />;
+    }
+    if (activeTab === "shop") {
+      return <ShopScreen />;
+    }
+    if (activeTab === "favorite") {
+      return <FavoriteScreen />;
+    }
+    if (activeTab === "cart") {
+      return <CartScreen />;
+    }
   };
 
   render() {
@@ -19,10 +97,42 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
+        <Container>
+          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+          <Header style={{ height: height * 0.1, backgroundColor: "#fafafa" }}>
+            <HeaderCustom />
+          </Header>
+          <Content>
+            <View style={styles.container}>
+              {/* <MarijuanaText style={{ fontSize: 100 }}>Marijuana</MarijuanaText>
+              <TitleText style={{ fontSize: 100 }}>Title</TitleText>
+              <ContentBoldText style={{ fontSize: 50 }}>
+                Content Bold
+              </ContentBoldText>
+              <ContentLightText style={{ fontSize: 50 }}>
+                Content Light
+              </ContentLightText>
+              <ContentItalicText style={{ fontSize: 50 }}>
+                Content Italic
+              </ContentItalicText> */}
+              {this.renderContent()}
+              <TouchableOpacity onPress={() => this.logIn()}>
+                <View>
+                  <MarijuanaText>Navigate</MarijuanaText>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </Content>
+
+          <Footer style={{ height: height * 0.1, backgroundColor: "#fafafa" }}>
+            <TabNavigation
+              loggedIn={this.state.loggedIn}
+              cart={this.state.cart}
+              activeTab={this.state.activeTab}
+              onPress={this.navigation}
+            />
+          </Footer>
+        </Container>
       );
     }
   }
@@ -30,16 +140,18 @@ export default class App extends React.Component {
   _loadResourcesAsync = async () => {
     return Promise.all([
       Asset.loadAsync([
-        require('./assets/images/robot-dev.png'),
-        require('./assets/images/robot-prod.png'),
+        // require("./assets/images/robot-dev.png"),
+        // require("./assets/images/robot-prod.png")
       ]),
       Font.loadAsync({
         // This is the font that we are using for our tab bar
         ...Icon.Ionicons.font,
-        // We include SpaceMono because we use it in HomeScreen.js. Feel free
-        // to remove this if you are not using it in your app
-        'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-      }),
+        marijuana: require("./assets/fonts/Marijuana.ttf"),
+        "sharp-black": require("./assets/fonts/dcc_sharp_distress_black_by_dccanim.otf"),
+        "sans-bold": require("./assets/fonts/Open_Sans_Condensed/OpenSansCondensed-Bold.ttf"),
+        "sans-light": require("./assets/fonts/Open_Sans_Condensed/OpenSansCondensed-Light.ttf"),
+        "sans-italic": require("./assets/fonts/Open_Sans_Condensed/OpenSansCondensed-LightItalic.ttf")
+      })
     ]);
   };
 
@@ -57,6 +169,8 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center"
+  }
 });
