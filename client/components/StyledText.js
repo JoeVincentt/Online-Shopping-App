@@ -8,7 +8,10 @@ export const MarijuanaText = props => (
   />
 );
 export const TitleText = props => (
-  <Text {...props} style={[{ fontFamily: "sharp-black" }, props.style]} />
+  <Text
+    {...props}
+    style={[{ fontFamily: "sharp-black", fontSize: 40 }, props.style]}
+  />
 );
 
 export const ContentBoldText = props => (

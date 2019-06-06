@@ -15,13 +15,6 @@ import CartScreen from "./screens/CartScreen";
 import FavoriteScreen from "./screens/FavoriteScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ShopScreen from "./screens/ShopScreen";
-import {
-  MarijuanaText,
-  TitleText,
-  ContentBoldText,
-  ContentItalicText,
-  ContentLightText
-} from "./components/StyledText";
 import { height, width } from "./constants/Layout";
 import TabNavigation from "./navigation/TabNavigation";
 import HeaderCustom from "./components/HeaderCustom";
@@ -29,7 +22,7 @@ import HeaderCustom from "./components/HeaderCustom";
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
-    activeTab: "shop",
+    activeTab: "auth",
     cart: [
       {
         id: 1,
@@ -102,27 +95,7 @@ export default class App extends React.Component {
           <Header style={{ height: height * 0.1, backgroundColor: "#fafafa" }}>
             <HeaderCustom />
           </Header>
-          <Content>
-            <View style={styles.container}>
-              {/* <MarijuanaText style={{ fontSize: 100 }}>Marijuana</MarijuanaText>
-              <TitleText style={{ fontSize: 100 }}>Title</TitleText>
-              <ContentBoldText style={{ fontSize: 50 }}>
-                Content Bold
-              </ContentBoldText>
-              <ContentLightText style={{ fontSize: 50 }}>
-                Content Light
-              </ContentLightText>
-              <ContentItalicText style={{ fontSize: 50 }}>
-                Content Italic
-              </ContentItalicText> */}
-              {this.renderContent()}
-              <TouchableOpacity onPress={() => this.logIn()}>
-                <View>
-                  <MarijuanaText>Navigate</MarijuanaText>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </Content>
+          <Content>{this.renderContent()}</Content>
 
           <Footer style={{ height: height * 0.1, backgroundColor: "#fafafa" }}>
             <TabNavigation
@@ -166,11 +139,4 @@ export default class App extends React.Component {
   };
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
+const styles = StyleSheet.create({});
