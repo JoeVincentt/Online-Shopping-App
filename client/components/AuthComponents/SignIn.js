@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Form, Item, Input } from "native-base";
-import { TitleText } from "../StyledText";
+import { TitleText, ContentLightText } from "../StyledText";
+import SimpleButton from "../Buttons/SimpleButton";
 
 export default class SignIn extends Component {
+  signIn = () => console.log("singIn");
   render() {
     return (
       <>
@@ -21,6 +23,7 @@ export default class SignIn extends Component {
             <Input secureTextEntry style={styles.inputField} />
           </Item>
         </Form>
+        <SimpleButton onPress={this.signIn} text="Sign In" />
       </>
     );
   }

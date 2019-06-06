@@ -43,15 +43,15 @@ export default class App extends React.Component {
     loggedIn: false
   };
 
-  componentWillMount() {
-    console.log("componentWillMount");
-  }
-  componentDidMount() {
-    console.log("componentDidMount");
-  }
-  componentWillUnmount() {
-    console.log("componentWillUnmount");
-  }
+  // componentWillMount() {
+  //   console.log("componentWillMount");
+  // }
+  // componentDidMount() {
+  //   console.log("componentDidMount");
+  // }
+  // componentWillUnmount() {
+  //   console.log("componentWillUnmount");
+  // }
 
   navigation = tabToNavigate => this.setState({ activeTab: tabToNavigate });
 
@@ -95,7 +95,7 @@ export default class App extends React.Component {
           <Header style={{ height: height * 0.1, backgroundColor: "#fafafa" }}>
             <HeaderCustom />
           </Header>
-          <Content>{this.renderContent()}</Content>
+          <Content style={{ flex: 1 }}>{this.renderContent()}</Content>
 
           <Footer style={{ height: height * 0.1, backgroundColor: "#fafafa" }}>
             <TabNavigation
