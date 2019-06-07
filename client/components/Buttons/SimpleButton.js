@@ -16,7 +16,9 @@ export default props => (
           props.style
         ]}
       >
-        <ContentLightText style={[{ fontSize: 40, padding: 10 }, props.style]}>
+        <ContentLightText
+          style={[{ fontSize: 40, padding: 10 }, props.textStyle]}
+        >
           {props.text}
         </ContentLightText>
       </View>

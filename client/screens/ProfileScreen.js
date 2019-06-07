@@ -3,7 +3,7 @@ import { Tab, Tabs, Text, TabHeading, Icon } from "native-base";
 import { StyleSheet, View } from "react-native";
 
 import Info from "../components/ProfileComponents/Info";
-import Orders from "../components/ProfileComponents/Orders";
+import Orders from "../components/ProfileComponents/Orders/Orders";
 import Payments from "../components/ProfileComponents/Payments";
 import colors from "../constants/Colors";
 export default class ProfileTabs extends Component {
