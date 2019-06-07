@@ -65,7 +65,7 @@ export default class App extends React.Component {
   renderContent = () => {
     const { activeTab } = this.state;
     if (activeTab === "auth") {
-      return <AuthScreen />;
+      return <AuthScreen logIn={this.logIn} />;
     }
     if (activeTab === "profile") {
       return <ProfileScreen />;

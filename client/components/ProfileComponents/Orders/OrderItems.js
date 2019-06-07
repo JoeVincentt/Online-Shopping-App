@@ -7,6 +7,7 @@ import {
   ContentItalicText,
   ContentLightText
 } from "../../StyledText";
+import colors from "../../../constants/Colors";
 
 export default props => (
   <View style={{ backgroundColor: "#ccc" }}>
@@ -22,7 +23,7 @@ export default props => (
       <ContentBoldText>Quantity: </ContentBoldText>
       <ContentLightText>{props.productQuantity}</ContentLightText>
     </Item>
-    <Item style={{ borderBottomColor: "red" }}>
+    <Item style={{ borderBottomColor: colors.danger }}>
       <ContentBoldText>Price: </ContentBoldText>
       <ContentLightText>{props.productPrice} $</ContentLightText>
     </Item>

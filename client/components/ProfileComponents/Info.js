@@ -71,6 +71,7 @@ export default class IconTextboxExample extends Component {
           <Input
             placeholder="ex: 7a Glory St, New York, NY, 10001"
             value={address}
+            numberOfLines={2}
             multiline
             editable
             onChangeText={address => this.setState({ address })}
@@ -80,7 +81,7 @@ export default class IconTextboxExample extends Component {
           style={{
             borderColor: "transparent",
             justifyContent: "center",
-            marginTop: 30
+            marginTop: 20
           }}
         >
           <SimpleButton

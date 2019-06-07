@@ -5,7 +5,11 @@ import { TitleText, ContentLightText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
 
 export default class SignIn extends Component {
-  signIn = () => console.log("singIn");
+  signIn = () => {
+    console.log("singIn");
+
+    this.props.logIn();
+  };
   render() {
     return (
       <>

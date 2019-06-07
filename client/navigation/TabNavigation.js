@@ -41,24 +41,26 @@ export default (TabNavigation = props => {
         tabText="Shop"
         active={props.activeTab === "shop" ? true : false}
       />
-      <NavigationTab
-        onPress={props.onPress}
-        navigateTo="favorite"
-        iconName="heart"
-        tabText="Favorite"
-        active={props.activeTab === "favorite" ? true : false}
-      />
 
       {props.loggedIn && (
-        <NavigationTab
-          onPress={props.onPress}
-          cartLength={props.cart.length > 0 ? props.cart.length : null}
-          cartItems={props.cart}
-          navigateTo="cart"
-          iconName="cart"
-          tabText="Cart"
-          active={props.activeTab === "cart" ? true : false}
-        />
+        <>
+          <NavigationTab
+            onPress={props.onPress}
+            navigateTo="favorite"
+            iconName="heart"
+            tabText="Favorite"
+            active={props.activeTab === "favorite" ? true : false}
+          />
+          <NavigationTab
+            onPress={props.onPress}
+            cartLength={props.cart.length > 0 ? props.cart.length : null}
+            cartItems={props.cart}
+            navigateTo="cart"
+            iconName="cart"
+            tabText="Cart"
+            active={props.activeTab === "cart" ? true : false}
+          />
+        </>
       )}
     </FooterTab>
   );

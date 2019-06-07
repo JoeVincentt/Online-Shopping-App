@@ -18,7 +18,7 @@ export default class AuthScreen extends Component {
 
   renderComponent = () => {
     if (!this.state.signup) {
-      return <SignIn />;
+      return <SignIn logIn={this.props.logIn} />;
     }
     if (this.state.signup) {
       return <SignUp />;

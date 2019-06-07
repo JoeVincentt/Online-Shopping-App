@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Header, Content, Item, Input, Icon } from "native-base";
-import { View, FlatList } from "react-native";
+import { View, ScrollView } from "react-native";
 
 import {
   TitleText,
@@ -8,6 +8,7 @@ import {
   ContentItalicText,
   ContentLightText
 } from "../../StyledText";
+import colors from "../../../constants/Colors";
 import SimpleButton from "../../Buttons/SimpleButton";
 import Order from "./Order";
 import OrderItems from "./OrderItems";
@@ -19,7 +20,7 @@ export default class Orders extends Component {
         id: 1,
         price: 30,
         orderedDate: "02/04/2021",
-        orderStatus: "Processing",
+        orderStatus: "Completed",
         customerEmail: "customer@cust.com",
         customerAddress: "7a Glory St, New York, NY, 10001",
         products: [
@@ -47,7 +48,7 @@ export default class Orders extends Component {
         id: 2,
         price: 30,
         orderedDate: "02/04/2021",
-        orderStatus: "Complete",
+        orderStatus: "In Process",
         customerEmail: "new@new.com",
         customerAddress: "7a Glory St, New York, NY, 10001",
         products: [
@@ -83,6 +84,7 @@ export default class Orders extends Component {
   };
 
   reportOrder = orderId => {
+    //open report modal
     console.log(orderId);
   };
 
@@ -98,6 +100,7 @@ export default class Orders extends Component {
               key={index}
               orderId={order.id}
               orderPrice={order.price}
+              orderStatus={order.orderStatus}
               customerEmail={order.customerEmail}
               orderedDate={order.orderedDate}
               customerAddress={order.customerAddress}
@@ -112,19 +115,21 @@ export default class Orders extends Component {
               />
             ))}
             <Item style={{ justifyContent: "center" }}>
-              {order.orderStatus !== "Complete" ? (
+              {order.orderStatus === "Shipped" ||
+              order.orderStatus === "Completed" ||
+              order.orderStatus === "Canceled" ? (
+                <SimpleButton
+                  onPress={() => this.reportOrder(order.id)}
+                  textStyle={{ fontSize: 20 }}
+                  style={{ borderColor: colors.warning }}
+                  text="Report"
+                />
+              ) : (
                 <SimpleButton
                   onPress={() => this.cancelOrder(order.id)}
                   text="Cancel"
                   textStyle={{ fontSize: 20 }}
-                  style={{ borderColor: "red" }}
-                />
-              ) : (
-                <SimpleButton
-                  onPress={() => this.reportOrder(order.id)}
-                  textStyle={{ fontSize: 20 }}
-                  style={{ borderColor: "yellow" }}
-                  text="Report"
+                  style={{ borderColor: colors.danger }}
                 />
               )}
 
