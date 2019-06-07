@@ -3,6 +3,8 @@ import { Container, Header, Content, Item, Input, Icon } from "native-base";
 import { View } from "react-native";
 
 import { TitleText } from "../StyledText";
+import SimpleButton from "../Buttons/SimpleButton";
+import colors from "../../constants/Colors";
 export default class IconTextboxExample extends Component {
   state = {
     username: "JohnyBoy",
@@ -11,6 +13,11 @@ export default class IconTextboxExample extends Component {
     address: "7a Glory St, New York, NY, 10001",
     phoneNumber: "810-520-6363"
   };
+
+  saveProfile = () => {
+    console.log("save profile");
+  };
+
   render() {
     const { username, fullName, email, address, phoneNumber } = this.state;
     return (
@@ -67,6 +74,19 @@ export default class IconTextboxExample extends Component {
             multiline
             editable
             onChangeText={address => this.setState({ address })}
+          />
+        </Item>
+        <Item
+          style={{
+            borderColor: "transparent",
+            justifyContent: "center",
+            marginTop: 30
+          }}
+        >
+          <SimpleButton
+            style={{ borderColor: colors.secondary }}
+            onPress={this.saveProfile}
+            text="Save"
           />
         </Item>
       </>

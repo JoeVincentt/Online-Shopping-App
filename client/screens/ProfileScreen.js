@@ -32,7 +32,7 @@ export default class ProfileTabs extends Component {
             </TabHeading>
           }
         >
-          <View style={{ paddingHorizontal: 30 }}>
+          <View style={styles.componentContainer}>
             <Info />
           </View>
         </Tab>
@@ -51,7 +51,9 @@ export default class ProfileTabs extends Component {
             </TabHeading>
           }
         >
-          <Orders />
+          <View style={styles.componentContainer}>
+            <Orders />
+          </View>
         </Tab>
         <Tab
           heading={
@@ -68,7 +70,9 @@ export default class ProfileTabs extends Component {
             </TabHeading>
           }
         >
-          <Payments />
+          <View style={styles.componentContainer}>
+            <Payments />
+          </View>
         </Tab>
       </Tabs>
     );
@@ -89,5 +93,8 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     fontSize: 16
+  },
+  componentContainer: {
+    paddingHorizontal: 30
   }
 });

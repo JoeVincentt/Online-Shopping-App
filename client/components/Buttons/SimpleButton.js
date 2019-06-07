@@ -1,14 +1,18 @@
 import React, { Component } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { Form, Item, Input } from "native-base";
-import { TitleText, ContentLightText } from "../StyledText";
+import { View, TouchableOpacity } from "react-native";
+import colors from "../../constants/Colors";
+import { ContentLightText } from "../StyledText";
 
 export default props => (
   <View style={{ justifyContent: "center", alignItems: "center" }}>
     <TouchableOpacity onPress={() => props.onPress()}>
       <View
         style={[
-          { borderColor: "#02EDFD", borderWidth: 2, margin: 15 },
+          {
+            borderColor: colors.secondary,
+            borderWidth: 2,
+            margin: 15
+          },
           props.style
         ]}
       >
