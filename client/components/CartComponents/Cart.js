@@ -1,56 +1,22 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import { Card } from "native-base";
 import { View, Alert } from "react-native";
 import SimpleButton from "../Buttons/SimpleButton";
-import {
-  TitleText,
-  ContentBoldText,
-  ContentLightText,
-  MarijuanaText
-} from "../StyledText";
+import { MarijuanaText } from "../StyledText";
 import colors from "../../constants/Colors";
 import CartItem from "./CartItem";
+import { CartContext } from "../../context/CartContext";
 
-export default class Cart extends Component {
-  state = {
-    cartItems: [
-      {
-        id: 1,
-        productName:
-          "Wyze Cam 1080p HD Indoor Wireless Smart Home Camera with Night Vision, 2-Way Audio, Works with Alexa",
-        productDescription: "this is an amazing product cool",
-        productImage:
-          "https://cdn.pixabay.com/photo/2018/06/12/22/29/bread-3471667_1280.jpg",
-        productQuantity: 2,
-        productPrice: 15
-      },
-      {
-        id: 2,
-        productName: "cool product",
-        productDescription: "this is an amazing product cool",
-        productImage:
-          "https://cdn.pixabay.com/photo/2013/04/07/21/30/croissant-101636_1280.jpg",
-        productQuantity: 1,
-        productPrice: 23
-      },
-      {
-        id: 3,
-        productName: "crazy product",
-        productDescription: "this is an amazing product cool",
-        productImage:
-          "https://cdn.pixabay.com/photo/2018/05/10/00/37/leaves-3386570_1280.jpg",
-        productQuantity: 4,
-        productPrice: 30
-      }
-    ]
-  };
+export default () => {
+  const { cartItems, updateItemsAfterDelete, emptyCartAfterOrder } = useContext(
+    CartContext
+  );
 
-  orderNow = () => {
+  const orderNow = () => {
     let totalPrice = 0;
-    for (let index = 0; index < this.state.cartItems.length; index++) {
+    for (let index = 0; index < cartItems.length; index++) {
       totalPrice +=
-        this.state.cartItems[index].productPrice *
-        this.state.cartItems[index].productQuantity;
+        cartItems[index].productPrice * cartItems[index].productQuantity;
     }
     Alert.alert(
       `Total: ${totalPrice}`,
@@ -62,7 +28,7 @@ export default class Cart extends Component {
         },
         {
           text: "Confirm",
-          onPress: () => this.confirmOrder(),
+          onPress: () => confirmOrder(),
           style: "cancel"
         }
       ],
@@ -70,22 +36,23 @@ export default class Cart extends Component {
     );
   };
 
-  confirmOrder = () => {
-    this.setState({ cartItems: [] });
+  const confirmOrder = () => {
+    emptyCartAfterOrder();
   };
 
-  openProductModal = () => {
+  const openProductModal = () => {
     console.log("open product modal");
   };
-  deleteItem = productId => {
-    const updatedCartItems = this.state.cartItems.filter(
+
+  const deleteItem = productId => {
+    const updatedCartItems = cartItems.filter(
       product => product.id !== productId
     );
-    this.setState({ cartItems: updatedCartItems });
+    updateItemsAfterDelete(updatedCartItems);
   };
 
   renderProducts = () => {
-    return this.state.cartItems.map((product, index) => (
+    return cartItems.map((product, index) => (
       <Card style={{ flex: 0 }} key={product.id}>
         <CartItem
           key={product.id}
@@ -95,32 +62,30 @@ export default class Cart extends Component {
           productDescription={product.productDescription}
           productQuantity={product.productQuantity}
           productPrice={product.productPrice}
-          deleteItem={this.deleteItem}
-          openProductModal={this.openProductModal}
+          deleteItem={deleteItem}
+          openProductModal={openProductModal}
         />
       </Card>
     ));
   };
 
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        {this.state.cartItems.length > 0 ? (
-          <SimpleButton
-            onPress={this.orderNow}
-            text="Order Now"
-            style={{ borderColor: colors.secondary }}
-          />
-        ) : (
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <MarijuanaText> Your Cart is Empty </MarijuanaText>
-          </View>
-        )}
+  return (
+    <View style={{ flex: 1 }}>
+      {cartItems.length > 0 ? (
+        <SimpleButton
+          onPress={orderNow}
+          text="Order Now"
+          style={{ borderColor: colors.secondary }}
+        />
+      ) : (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <MarijuanaText> Your Cart is Empty </MarijuanaText>
+        </View>
+      )}
 
-        {this.renderProducts()}
-      </View>
-    );
-  }
-}
+      {renderProducts()}
+    </View>
+  );
+};

@@ -1,8 +1,4 @@
-import React, { Component } from "react";
-import { MarijuanaText } from "../components/StyledText";
+import React from "react";
+import Favorite from "../components/FavoriteComponents/Favorite";
 
-export default class FavoriteScreen extends Component {
-  render() {
-    return <MarijuanaText>FavoriteScreen</MarijuanaText>;
-  }
-}
+export default (FavoriteScreen = () => <Favorite />);

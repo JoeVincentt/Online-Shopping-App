@@ -4,8 +4,13 @@ import { CardItem, Thumbnail, Left, Body, Right, Item } from "native-base";
 import SimpleButton from "../Buttons/SimpleButton";
 import { TitleText, ContentBoldText, ContentLightText } from "../StyledText";
 import colors from "../../constants/Colors";
+import { UserProfileContext } from "../../context/UserProfileContext";
+import { CartContext } from "../../context/CartContext";
 
 export default props => {
+  const { w } = useContext(UserProfileContext);
+  const { c } = useContext(CartContext);
+
   return (
     <>
       <CardItem>
