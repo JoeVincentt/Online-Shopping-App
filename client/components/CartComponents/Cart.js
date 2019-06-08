@@ -52,10 +52,9 @@ export default class Cart extends Component {
         this.state.cartItems[index].productPrice *
         this.state.cartItems[index].productQuantity;
     }
-    console.log(totalPrice);
     Alert.alert(
-      `Your Total: ${totalPrice}`,
-      "Please Confirm Order",
+      `Total: ${totalPrice}`,
+      "Please Confirm Your Order",
       [
         {
           text: "Cancel",
@@ -63,12 +62,16 @@ export default class Cart extends Component {
         },
         {
           text: "Confirm",
-          onPress: () => this.setState({ cartItems: [] }),
+          onPress: () => this.confirmOrder(),
           style: "cancel"
         }
       ],
       { cancelable: false }
     );
+  };
+
+  confirmOrder = () => {
+    this.setState({ cartItems: [] });
   };
 
   openProductModal = () => {
