@@ -78,7 +78,10 @@ export default class Cart extends Component {
     console.log("open product modal");
   };
   deleteItem = productId => {
-    console.log(productId);
+    const updatedCartItems = this.state.cartItems.filter(
+      product => product.id !== productId
+    );
+    this.setState({ cartItems: updatedCartItems });
   };
 
   renderProducts = () => {
@@ -112,7 +115,7 @@ export default class Cart extends Component {
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            <MarijuanaText> Your Cart is Empty</MarijuanaText>
+            <MarijuanaText> Your Cart is Empty </MarijuanaText>
           </View>
         )}
 

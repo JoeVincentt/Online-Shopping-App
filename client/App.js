@@ -20,6 +20,8 @@ import { height, width } from "./constants/Layout";
 import TabNavigation from "./navigation/TabNavigation";
 import HeaderCustom from "./components/HeaderCustom";
 import colors from "./constants/Colors";
+import { UserProfileContextProvider } from "./context/UserProfileContext";
+import { CartContextProvider } from "./context/CartContext";
 
 export default class App extends React.Component {
   state = {
@@ -92,33 +94,37 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <Container>
-          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <Header
-            style={{
-              backgroundColor: colors.defaultBackgroundColor,
-              paddingTop: getStatusBarHeight(),
-              height: 54 + getStatusBarHeight()
-            }}
-          >
-            <HeaderCustom />
-          </Header>
-          <Content style={{ flex: 1 }}>{this.renderContent()}</Content>
+        <UserProfileContextProvider>
+          <CartContextProvider>
+            <Container>
+              {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+              <Header
+                style={{
+                  backgroundColor: colors.defaultBackgroundColor,
+                  paddingTop: getStatusBarHeight(),
+                  height: 54 + getStatusBarHeight()
+                }}
+              >
+                <HeaderCustom />
+              </Header>
+              <Content style={{ flex: 1 }}>{this.renderContent()}</Content>
 
-          <Footer
-            style={{
-              height: Platform.OS === "ios" ? height * 0.1 : height * 0.15,
-              backgroundColor: colors.defaultBackgroundColor
-            }}
-          >
-            <TabNavigation
-              loggedIn={this.state.loggedIn}
-              cart={this.state.cart}
-              activeTab={this.state.activeTab}
-              onPress={this.navigation}
-            />
-          </Footer>
-        </Container>
+              <Footer
+                style={{
+                  height: Platform.OS === "ios" ? height * 0.1 : height * 0.15,
+                  backgroundColor: colors.defaultBackgroundColor
+                }}
+              >
+                <TabNavigation
+                  loggedIn={this.state.loggedIn}
+                  cart={this.state.cart}
+                  activeTab={this.state.activeTab}
+                  onPress={this.navigation}
+                />
+              </Footer>
+            </Container>
+          </CartContextProvider>
+        </UserProfileContextProvider>
       );
     }
   }
