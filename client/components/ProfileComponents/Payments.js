@@ -99,7 +99,7 @@ export default class Payments extends Component {
         </View>
         <Item style={{ borderColor: "transparent", justifyContent: "center" }}>
           <SimpleButton
-            style={{ borderColor: "red" }}
+            style={{ borderColor: colors.danger }}
             onPress={this.clearCardInformation}
             text="Clear"
           />

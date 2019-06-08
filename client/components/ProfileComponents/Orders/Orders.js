@@ -145,7 +145,6 @@ export default class Orders extends Component {
   };
 
   render() {
-    const { username, fullName, email, address, phoneNumber } = this.state;
     return (
       <>
         <View style={{ alignSelf: "flex-start", paddingTop: 20 }}>

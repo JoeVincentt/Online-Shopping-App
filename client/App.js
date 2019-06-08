@@ -24,7 +24,7 @@ import colors from "./constants/Colors";
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
-    activeTab: "profile",
+    activeTab: "cart",
     cart: [
       {
         id: 1,

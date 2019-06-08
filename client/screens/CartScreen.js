@@ -1,8 +1,14 @@
 import React, { Component } from "react";
-import { MarijuanaText } from "../components/StyledText";
+import Cart from "../components/CartComponents/Cart";
 
 export default class CartScreen extends Component {
+  componentDidMount() {
+    console.log("didmount");
+  }
+  componentWillUnmount() {
+    console.log("didUnmount");
+  }
   render() {
-    return <MarijuanaText>CartScreen</MarijuanaText>;
+    return <Cart />;
   }
 }
