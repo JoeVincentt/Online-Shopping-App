@@ -8,8 +8,8 @@ import { UserProfileContext } from "../../context/UserProfileContext";
 import { CartContext } from "../../context/CartContext";
 
 export default props => {
-  const { w } = useContext(UserProfileContext);
-  const { addItemToCart } = useContext(CartContext);
+  const {} = useContext(UserProfileContext);
+  const {} = useContext(CartContext);
 
   return (
     <>
@@ -62,7 +62,7 @@ export default props => {
         <Right>
           <SimpleButton
             onPress={() => {
-              addItemToCart(props.id);
+              props.addItemToCart(props.id);
               props.deleteItem(props.id);
             }}
             text="Add To Cart"

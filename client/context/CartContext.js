@@ -11,6 +11,8 @@ export class CartContextProvider extends React.Component {
     emptyCartAfterOrder: () => this.setState({ cartItems: [] }),
     addItemToCart: async productId => {
       //call to API to fetch product
+      //get product and update cartItems
+      //go thru items and check if there items with the same id and if so to increment amount instead adding one mor product
       const addedProduct = {
         id: 12,
         productName: "added product",
@@ -20,9 +22,7 @@ export class CartContextProvider extends React.Component {
         productQuantity: 11,
         productPrice: 44
       };
-      console.log(this.state.cartItems);
-      const updatedCartItems = await this.state.cartItems.unshift(addedProduct);
-      console.log(this.state.cartItems);
+      await this.state.cartItems.unshift(addedProduct);
       this.setState({ cartItems: this.state.cartItems });
     },
     cartItems: [

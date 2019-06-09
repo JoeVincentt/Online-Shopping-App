@@ -48,6 +48,7 @@ export default () => {
     const updatedCartItems = cartItems.filter(
       product => product.id !== productId
     );
+    //make call to api to update cartItems
     updateItems(updatedCartItems);
   };
 

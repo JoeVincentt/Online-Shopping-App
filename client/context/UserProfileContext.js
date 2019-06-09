@@ -45,6 +45,7 @@ export class UserProfileContextProvider extends React.Component {
       this.setState({ favoriteProducts }),
     updateFavoriteItems: updatedFavoriteProducts =>
       this.setState({ favoriteProducts: updatedFavoriteProducts }),
+    //make a call to API to update favorite items
     orders: [
       {
         id: 1,
