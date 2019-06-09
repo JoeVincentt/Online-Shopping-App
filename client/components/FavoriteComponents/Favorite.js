@@ -71,7 +71,7 @@ export default () => {
             alignItems: "center"
           }}
         >
-          <MarijuanaText> Your Have no Favorites </MarijuanaText>
+          <MarijuanaText> Empty </MarijuanaText>
         </View>
       ) : (
         renderProducts()

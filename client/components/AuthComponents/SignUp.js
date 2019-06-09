@@ -10,18 +10,21 @@ export default class SignIn extends Component {
     return (
       <>
         <Form>
+          <View style={{ height: 30 }} />
           <Item stackedLabel>
             <View style={styles.inputLabel}>
               <TitleText>Email</TitleText>
             </View>
             <Input style={styles.inputField} />
           </Item>
+          <View style={{ height: 30 }} />
           <Item stackedLabel>
             <View style={styles.inputLabel}>
               <TitleText>Password</TitleText>
             </View>
             <Input secureTextEntry style={styles.inputField} />
           </Item>
+          <View style={{ height: 30 }} />
           <Item stackedLabel last>
             <View style={styles.inputLabel}>
               <TitleText>Repeat Password</TitleText>
@@ -37,10 +40,10 @@ export default class SignIn extends Component {
 
 const styles = StyleSheet.create({
   inputLabel: {
-    alignSelf: "flex-start",
-    paddingTop: 10
+    alignSelf: "flex-start"
   },
   inputField: {
-    fontFamily: "sans-light"
+    fontFamily: "sans-light",
+    fontSize: 20
   }
 });

@@ -97,7 +97,7 @@ export default () => {
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-          <MarijuanaText> Your Cart is Empty </MarijuanaText>
+          <MarijuanaText> Empty </MarijuanaText>
         </View>
       )}
     </View>

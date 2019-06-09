@@ -25,39 +25,9 @@ import { CartContextProvider } from "./context/CartContext";
 class App extends React.Component {
   state = {
     isLoadingComplete: false,
-    activeTab: "profile",
-    loggedIn: true
+    activeTab: "shop",
+    loggedIn: false
   };
-
-  // componentWillMount() {
-  //   console.log("componentWillMount");
-  // }
-  //   componentDidMount() {
-  //     const {
-  //       setUsername,
-  //       setFullName,
-  //       setAddress,
-  //       setEmail,
-  //       setPhoneNumber,
-  //       setOrders,
-  //       setFavoriteProducts
-  //     } = this.props.context;
-
-  //     console.log("componentDidMount");
-
-  //     //Fetch User Profile
-  //     setTimeout(() => {
-  //       setUsername("Van");
-  //       setFullName("Wan Gog"),
-  //         setAddress("212 St ave"),
-  //         setEmail("e@e.com"),
-  //         setPhoneNumber("9431234122");
-  //       setOrders([]), setFavoriteProducts([]);
-  //     }, 3300);
-  //   }
-  // componentWillUnmount() {
-  //   console.log("componentWillUnmount");
-  // }
 
   navigation = tabToNavigate => this.setState({ activeTab: tabToNavigate });
 

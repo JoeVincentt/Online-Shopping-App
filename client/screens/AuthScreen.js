@@ -27,10 +27,8 @@ export default class AuthScreen extends Component {
 
   render() {
     return (
-      <View>
-        <View style={{ flex: 1, paddingHorizontal: 30 }}>
-          {this.renderComponent()}
-        </View>
+      <View style={{ flex: 1 }}>
+        <View style={{ paddingHorizontal: 30 }}>{this.renderComponent()}</View>
 
         <View style={styles.switchTextContainer}>
           <ContentItalicText style={{ fontSize: 20 }}>
