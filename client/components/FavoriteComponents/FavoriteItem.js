@@ -66,7 +66,7 @@ export default props => {
               props.deleteItem(props.id);
             }}
             text="Add To Cart"
-            style={{ borderColor: colors.danger }}
+            style={{ borderColor: colors.secondary }}
             textStyle={{ fontSize: 16, padding: 5 }}
           />
         </Right>

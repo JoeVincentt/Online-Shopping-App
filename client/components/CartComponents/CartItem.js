@@ -46,15 +46,15 @@ export default props => {
         </Left>
       </CardItem>
       <CardItem>
-        <Left />
-        <Right>
+        <Left>
           <SimpleButton
             onPress={() => props.deleteItem(props.id)}
             text="DELETE"
             style={{ borderColor: colors.danger }}
             textStyle={{ fontSize: 16, padding: 5 }}
           />
-        </Right>
+        </Left>
+        <Right />
       </CardItem>
     </>
   );

@@ -109,7 +109,7 @@ class App extends React.Component {
               <HeaderCustom />
             </Header>
 
-            <Content style={{ flex: 0 }}>{this.renderContent()}</Content>
+            <View style={{ flex: 1 }}>{this.renderContent()}</View>
 
             <Footer
               style={{
