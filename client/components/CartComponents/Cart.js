@@ -8,7 +8,7 @@ import CartItem from "./CartItem";
 import { CartContext } from "../../context/CartContext";
 
 export default () => {
-  const { cartItems, updateItemsAfterDelete, emptyCartAfterOrder } = useContext(
+  const { cartItems, updateItems, emptyCartAfterOrder } = useContext(
     CartContext
   );
 
@@ -48,7 +48,7 @@ export default () => {
     const updatedCartItems = cartItems.filter(
       product => product.id !== productId
     );
-    updateItemsAfterDelete(updatedCartItems);
+    updateItems(updatedCartItems);
   };
 
   renderProducts = () => {
@@ -72,11 +72,14 @@ export default () => {
   return (
     <View style={{ flex: 1 }}>
       {cartItems.length > 0 ? (
-        <SimpleButton
-          onPress={orderNow}
-          text="Order Now"
-          style={{ borderColor: colors.secondary }}
-        />
+        <View>
+          <SimpleButton
+            onPress={orderNow}
+            text="Order Now"
+            style={{ borderColor: colors.secondary }}
+          />
+          {renderProducts()}
+        </View>
       ) : (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -84,8 +87,6 @@ export default () => {
           <MarijuanaText> Your Cart is Empty </MarijuanaText>
         </View>
       )}
-
-      {renderProducts()}
     </View>
   );
 };

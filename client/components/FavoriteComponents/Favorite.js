@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
 import { Card } from "native-base";
-import { View, Alert } from "react-native";
-import SimpleButton from "../Buttons/SimpleButton";
+import { View } from "react-native";
+
 import { MarijuanaText } from "../StyledText";
-import colors from "../../constants/Colors";
 import FavoriteItem from "./FavoriteItem";
 import { UserProfileContext } from "../../context/UserProfileContext";
 
 export default () => {
-  const { favoriteProducts, updateItemsAfterDelete } = useContext(
+  const { favoriteProducts, updateFavoriteItems } = useContext(
     UserProfileContext
   );
 
@@ -20,7 +19,7 @@ export default () => {
     const updatedFavoriteProducts = favoriteProducts.filter(
       product => product.id !== productId
     );
-    updateItemsAfterDelete(updatedFavoriteProducts);
+    updateFavoriteItems(updatedFavoriteProducts);
   };
 
   renderProducts = () => {
@@ -43,15 +42,19 @@ export default () => {
 
   return (
     <View style={{ flex: 1 }}>
-      {favoriteProducts.length <= 0 && (
+      {favoriteProducts.length <= 0 ? (
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
         >
           <MarijuanaText> Your Have no Favorites </MarijuanaText>
         </View>
+      ) : (
+        renderProducts()
       )}
-
-      {renderProducts()}
     </View>
   );
 };

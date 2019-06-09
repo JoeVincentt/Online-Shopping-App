@@ -6,10 +6,25 @@ export const CartContextConsumer = CartContext.Consumer;
 
 export class CartContextProvider extends React.Component {
   state = {
-    updateItemsAfterDelete: updatedCartItems =>
+    updateItems: updatedCartItems =>
       this.setState({ cartItems: updatedCartItems }),
     emptyCartAfterOrder: () => this.setState({ cartItems: [] }),
-
+    addItemToCart: async productId => {
+      //call to API to fetch product
+      const addedProduct = {
+        id: 12,
+        productName: "added product",
+        productDescription: "added is an amazing product cool",
+        productImage:
+          "https://cdn.pixabay.com/photo/2013/04/07/21/30/croissant-101636_1280.jpg",
+        productQuantity: 11,
+        productPrice: 44
+      };
+      console.log(this.state.cartItems);
+      const updatedCartItems = await this.state.cartItems.unshift(addedProduct);
+      console.log(this.state.cartItems);
+      this.setState({ cartItems: this.state.cartItems });
+    },
     cartItems: [
       {
         id: 1,

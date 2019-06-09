@@ -6,6 +6,30 @@ export const UserProfileContextConsumer = UserProfileContext.Consumer;
 
 export class UserProfileContextProvider extends React.Component {
   state = {
+    signedIn: false,
+    setSignIn: () =>
+      this.setState({
+        signedIn: true,
+        signedIn: false,
+        username: "",
+        fullName: "",
+        email: "",
+        address: "",
+        phoneNumber: "",
+        orders: [],
+        favoriteProducts: []
+      }),
+    setSignOut: () =>
+      this.setState({
+        signedIn: false,
+        username: "",
+        fullName: "",
+        email: "",
+        address: "",
+        phoneNumber: "",
+        orders: [],
+        favoriteProducts: []
+      }),
     username: "JohnyBoy",
     fullName: "Joe Vincent",
     email: "joe@joe.com",
@@ -16,6 +40,11 @@ export class UserProfileContextProvider extends React.Component {
     setEmail: email => this.setState({ email }),
     setAddress: address => this.setState({ address }),
     setPhoneNumber: phoneNumber => this.setState({ phoneNumber }),
+    setOrders: orders => this.setState({ orders }),
+    setFavoriteProducts: favoriteProducts =>
+      this.setState({ favoriteProducts }),
+    updateFavoriteItems: updatedFavoriteProducts =>
+      this.setState({ favoriteProducts: updatedFavoriteProducts }),
     orders: [
       {
         id: 1,
@@ -75,8 +104,6 @@ export class UserProfileContextProvider extends React.Component {
       }
     ],
 
-    updateItemsAfterDelete: updatedFavoriteProducts =>
-      this.setState({ favoriteProducts: updatedFavoriteProducts }),
     favoriteProducts: [
       {
         id: 1,

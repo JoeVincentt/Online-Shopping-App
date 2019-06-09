@@ -9,7 +9,7 @@ import { CartContext } from "../../context/CartContext";
 
 export default props => {
   const { w } = useContext(UserProfileContext);
-  const { c } = useContext(CartContext);
+  const { addItemToCart } = useContext(CartContext);
 
   return (
     <>
@@ -51,11 +51,21 @@ export default props => {
         </Left>
       </CardItem>
       <CardItem>
-        <Left />
-        <Right>
+        <Left>
           <SimpleButton
             onPress={() => props.deleteItem(props.id)}
             text="DELETE"
+            style={{ borderColor: colors.danger }}
+            textStyle={{ fontSize: 16, padding: 5 }}
+          />
+        </Left>
+        <Right>
+          <SimpleButton
+            onPress={() => {
+              addItemToCart(props.id);
+              props.deleteItem(props.id);
+            }}
+            text="Add To Cart"
             style={{ borderColor: colors.danger }}
             textStyle={{ fontSize: 16, padding: 5 }}
           />
