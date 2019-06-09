@@ -6,7 +6,7 @@ import { TitleText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
 import colors from "../../constants/Colors";
 import { UserProfileContext } from "../../context/UserProfileContext";
-export default () => {
+export default props => {
   const {
     username,
     fullName,
@@ -22,6 +22,11 @@ export default () => {
 
   const saveProfile = () => {
     console.log("save profile");
+  };
+  const logOut = () => {
+    props.logOut();
+    console.log("logout");
+    //clear user data
   };
 
   return (
@@ -88,6 +93,12 @@ export default () => {
           marginTop: 20
         }}
       >
+        <SimpleButton
+          style={{ borderColor: colors.danger }}
+          textStyle={{ fontSize: 30, padding: 5 }}
+          onPress={logOut}
+          text="Sing Out"
+        />
         <SimpleButton
           style={{ borderColor: colors.secondary }}
           onPress={saveProfile}

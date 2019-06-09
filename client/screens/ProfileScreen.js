@@ -34,7 +34,7 @@ export default class ProfileTabs extends Component {
             }
           >
             <View style={styles.componentContainer}>
-              <Info />
+              <Info logOut={this.props.logOut} />
             </View>
           </Tab>
           <Tab

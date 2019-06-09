@@ -26,11 +26,15 @@ class App extends React.Component {
   state = {
     isLoadingComplete: false,
     activeTab: "shop",
-    loggedIn: false
+    loggedIn: true
   };
 
   navigation = tabToNavigate => this.setState({ activeTab: tabToNavigate });
 
+  logOut = () => {
+    this.setState({ loggedIn: false });
+    this.navigation("shop");
+  };
   logIn = () => {
     this.setState({ loggedIn: true });
     this.navigation("shop");
@@ -42,7 +46,7 @@ class App extends React.Component {
       return <AuthScreen logIn={this.logIn} />;
     }
     if (activeTab === "profile") {
-      return <ProfileScreen />;
+      return <ProfileScreen logOut={this.logOut} />;
     }
     if (activeTab === "shop") {
       return <ShopScreen />;

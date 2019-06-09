@@ -18,8 +18,10 @@ export default (SignIn = props => {
     setFavoriteProducts
   } = useContext(UserProfileContext);
   const { updateItems } = useContext(CartContext);
+  //create State for login
 
   const signIn = () => {
+    //fetch and setup user
     console.log("singIn");
     setTimeout(() => {
       setUsername("Van");
@@ -31,7 +33,7 @@ export default (SignIn = props => {
       setFavoriteProducts([]);
       updateItems([]);
       props.logIn();
-    }, 3300);
+    }, 400);
   };
 
   return (
