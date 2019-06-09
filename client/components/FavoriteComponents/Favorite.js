@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Card } from "native-base";
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 
 import { MarijuanaText } from "../StyledText";
 import FavoriteItem from "./FavoriteItem";
@@ -74,7 +74,7 @@ export default () => {
           <MarijuanaText> Empty </MarijuanaText>
         </View>
       ) : (
-        renderProducts()
+        <ScrollView>{renderProducts()}</ScrollView>
       )}
     </View>
   );
