@@ -3,7 +3,7 @@ import { View, ScrollView, TouchableOpacity } from "react-native";
 import { Spinner } from "native-base";
 
 import ShopCategories from "./ShopCategories";
-
+import ShopItem from "./ShopItem";
 import { MarijuanaText } from "../StyledText";
 
 export default class Shop extends Component {
@@ -37,6 +37,8 @@ export default class Shop extends Component {
   };
 
   componentDidMount() {
+    //to do: fetch categories from the server and set activeCategory name by index 0
+
     this.fetchProducts();
   }
 
@@ -93,7 +95,7 @@ export default class Shop extends Component {
     const { products } = this.state;
     if (products.length > 0) {
       return products.map((product, index) => (
-        <MarijuanaText key={index}>{product.name}</MarijuanaText>
+        <ShopItem key={index} name={product.name} />
       ));
     }
   };
@@ -114,7 +116,7 @@ export default class Shop extends Component {
   render() {
     const { loading } = this.state;
     return (
-      <View>
+      <ScrollView>
         <ScrollView
           showsHorizontalScrollIndicator={false}
           horizontal={true}
@@ -125,7 +127,7 @@ export default class Shop extends Component {
         <TouchableOpacity onPress={() => this.renderProducts()}>
           {!loading ? this.renderProducts() : <Spinner />}
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   }
 }
