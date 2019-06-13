@@ -12,6 +12,7 @@ import ShopCategories from "./ShopCategories";
 import ShopItem from "./ShopItem";
 import { MarijuanaText } from "../StyledText";
 import { ShopContext } from "../../context/ShopContext";
+import { UIContext } from "../../context/UIContext";
 
 export default (Shop = () => {
   const {
@@ -21,6 +22,7 @@ export default (Shop = () => {
     categories,
     activeCategory
   } = useContext(ShopContext);
+  const { setShowFooter } = useContext(UIContext);
 
   const renderCategoriesBar = () => {
     return categories.map((category, index) => (

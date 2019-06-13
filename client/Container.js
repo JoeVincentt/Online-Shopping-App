@@ -5,7 +5,8 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Animated
 } from "react-native";
 import { Container, Header, Content, Footer, Spinner } from "native-base";
 import { AppLoading, Asset, Font, Icon } from "expo";
@@ -22,8 +23,10 @@ import HeaderCustom from "./components/HeaderCustom";
 import colors from "./constants/Colors";
 import { CartContextProvider } from "./context/CartContext";
 import { ShopContextProvider } from "./context/ShopContext";
+import { UIContext } from "./context/UIContext";
 
 class App extends React.Component {
+  static contextType = UIContext;
   state = {
     isLoadingComplete: false,
     activeTab: "shop",
@@ -66,6 +69,8 @@ class App extends React.Component {
   };
 
   render() {
+    let { showFooter, footerY } = this.context;
+
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <AppLoading
@@ -94,20 +99,32 @@ class App extends React.Component {
                 </Header>
 
                 <View style={{ flex: 1 }}>{this.renderContent()}</View>
+                {showFooter && (
+                  <Footer
+                    style={{
+                      height: Platform.OS === "android" && height * 0.15,
 
-                <Footer
-                  style={{
-                    height:
-                      Platform.OS === "ios" ? height * 0.1 : height * 0.15,
-                    backgroundColor: colors.defaultBackgroundColor
-                  }}
-                >
-                  <TabNavigation
-                    loggedIn={this.state.loggedIn}
-                    activeTab={this.state.activeTab}
-                    onPress={this.navigation}
-                  />
-                </Footer>
+                      backgroundColor: colors.defaultBackgroundColor
+                    }}
+                  >
+                    <Animated.View
+                      style={{
+                        flex: 1,
+                        transform: [
+                          {
+                            translateY: footerY
+                          }
+                        ]
+                      }}
+                    >
+                      <TabNavigation
+                        loggedIn={this.state.loggedIn}
+                        activeTab={this.state.activeTab}
+                        onPress={this.navigation}
+                      />
+                    </Animated.View>
+                  </Footer>
+                )}
               </Container>
             )}
           </ShopContextProvider>
