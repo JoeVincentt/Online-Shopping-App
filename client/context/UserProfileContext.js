@@ -7,17 +7,24 @@ export const UserProfileContextConsumer = UserProfileContext.Consumer;
 export class UserProfileContextProvider extends React.Component {
   state = {
     signedIn: false,
-    setSignIn: () =>
+    setSignIn: (
+      username,
+      fullName,
+      email,
+      address,
+      phoneNumber,
+      orders,
+      favoriteProducts
+    ) =>
       this.setState({
         signedIn: true,
-        signedIn: false,
-        username: "",
-        fullName: "",
-        email: "",
-        address: "",
-        phoneNumber: "",
-        orders: [],
-        favoriteProducts: []
+        username,
+        fullName,
+        email,
+        address,
+        phoneNumber,
+        orders,
+        favoriteProducts
       }),
     setSignOut: () =>
       this.setState({
@@ -35,14 +42,14 @@ export class UserProfileContextProvider extends React.Component {
     email: "joe@joe.com",
     address: "7a Glory St, New York, NY, 10001",
     phoneNumber: "810-520-6363",
-    setUsername: username => this.setState({ username }),
-    setFullName: fullName => this.setState({ fullName }),
-    setEmail: email => this.setState({ email }),
-    setAddress: address => this.setState({ address }),
-    setPhoneNumber: phoneNumber => this.setState({ phoneNumber }),
-    setOrders: orders => this.setState({ orders }),
-    setFavoriteProducts: favoriteProducts =>
-      this.setState({ favoriteProducts }),
+    // setUsername: username => this.setState({ username }),
+    // setFullName: fullName => this.setState({ fullName }),
+    // setEmail: email => this.setState({ email }),
+    // setAddress: address => this.setState({ address }),
+    // setPhoneNumber: phoneNumber => this.setState({ phoneNumber }),
+    // setOrders: orders => this.setState({ orders }),
+    // setFavoriteProducts: favoriteProducts =>
+    //   this.setState({ favoriteProducts }),
     updateFavoriteItems: updatedFavoriteProducts =>
       this.setState({ favoriteProducts: updatedFavoriteProducts }),
     addItemToFavorite: async productId => {

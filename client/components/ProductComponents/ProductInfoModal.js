@@ -22,10 +22,11 @@ export default (ProductInfoModal = ({
   productId
 }) => {
   const { addItemToCart } = useContext(CartContext);
-  const { addItemToFavorite } = useContext(UserProfileContext);
+  const { addItemToFavorite, signedIn } = useContext(UserProfileContext);
   const [productInfo, setProductInfo] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    // console.log(productId);
     setTimeout(() => {
       setProductInfo({
         id: "1",
@@ -68,6 +69,7 @@ export default (ProductInfoModal = ({
         <Card>
           {/* Image */}
           <ScrollView>
+            {/* Closing button */}
             <View
               style={{
                 alignItems: "flex-end",
@@ -84,6 +86,8 @@ export default (ProductInfoModal = ({
                 }}
               />
             </View>
+            {/* ClosingButton */}
+
             <CardItem>
               <Image
                 source={{
@@ -157,24 +161,30 @@ export default (ProductInfoModal = ({
                   </ContentBoldText>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => addItemToFavorite(productId)}>
-                <View style={styles.buttonContainer}>
-                  <Icon
-                    name="heart"
-                    style={{ margin: 10, color: colors.danger }}
-                  />
-                </View>
-              </TouchableOpacity>
 
-              <View>
-                <SimpleButton
-                  onPress={() => {
-                    addItemToCart(productId);
-                  }}
-                  text="ADD TO CART"
-                  textStyle={{ fontSize: 20, padding: 5 }}
-                />
-              </View>
+              {signedIn && (
+                <>
+                  <TouchableOpacity
+                    onPress={() => addItemToFavorite(productId)}
+                  >
+                    <View style={styles.buttonContainer}>
+                      <Icon
+                        name="heart"
+                        style={{ margin: 10, color: colors.danger }}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                  <View>
+                    <SimpleButton
+                      onPress={() => {
+                        addItemToCart(productId);
+                      }}
+                      text="ADD TO CART"
+                      textStyle={{ fontSize: 20, padding: 5 }}
+                    />
+                  </View>
+                </>
+              )}
             </View>
             {/* Button Panel */}
           </ScrollView>

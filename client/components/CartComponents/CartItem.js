@@ -63,7 +63,6 @@ export default props => {
           productId={props.id}
         />
       )}
-
       {/* Modal */}
     </>
   );

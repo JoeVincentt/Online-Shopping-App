@@ -8,30 +8,24 @@ import { UserProfileContext } from "../../context/UserProfileContext";
 import { CartContext } from "../../context/CartContext";
 
 export default (SignIn = props => {
-  const {
-    setUsername,
-    setFullName,
-    setAddress,
-    setEmail,
-    setPhoneNumber,
-    setOrders,
-    setFavoriteProducts
-  } = useContext(UserProfileContext);
-  const { updateItems } = useContext(CartContext);
+  const { setSignIn } = useContext(UserProfileContext);
+  const { updateCartItems } = useContext(CartContext);
   //create State for login
 
   const signIn = () => {
     //fetch and setup user
     console.log("singIn");
     setTimeout(() => {
-      setUsername("Van");
-      setFullName("Wan Gog"),
-        setAddress("212 St ave"),
-        setEmail("e@e.com"),
-        setPhoneNumber("9431234122");
-      setOrders([]);
-      setFavoriteProducts([]);
-      updateItems([]);
+      setSignIn(
+        "Van",
+        "Wan Gog",
+        "E@e.com",
+        "212 St ave",
+        "9431234122",
+        [],
+        []
+      );
+      updateCartItems([]);
       props.logIn();
     }, 400);
   };

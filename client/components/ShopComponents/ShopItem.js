@@ -21,7 +21,7 @@ export default (ShopItem = ({
   likes
 }) => {
   const { addItemToCart } = useContext(CartContext);
-  const { addItemToFavorite } = useContext(UserProfileContext);
+  const { addItemToFavorite, signedIn } = useContext(UserProfileContext);
 
   const [productInfoModalOpen, setProductInfoModalOpen] = useState(false);
 
@@ -87,21 +87,28 @@ export default (ShopItem = ({
               <ContentBoldText>{comments.toString()}</ContentBoldText>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => addItemToFavorite(id)}>
-            <View style={styles.buttonContainer}>
-              <Icon name="heart" style={{ margin: 10, color: colors.danger }} />
-            </View>
-          </TouchableOpacity>
+          {signedIn && (
+            <>
+              <TouchableOpacity onPress={() => addItemToFavorite(id)}>
+                <View style={styles.buttonContainer}>
+                  <Icon
+                    name="heart"
+                    style={{ margin: 10, color: colors.danger }}
+                  />
+                </View>
+              </TouchableOpacity>
 
-          <View>
-            <SimpleButton
-              onPress={() => {
-                addItemToCart(id);
-              }}
-              text="ADD TO CART"
-              textStyle={{ fontSize: 20, padding: 5 }}
-            />
-          </View>
+              <View>
+                <SimpleButton
+                  onPress={() => {
+                    addItemToCart(id);
+                  }}
+                  text="ADD TO CART"
+                  textStyle={{ fontSize: 20, padding: 5 }}
+                />
+              </View>
+            </>
+          )}
         </View>
       </Card>
       {/* Modal */}

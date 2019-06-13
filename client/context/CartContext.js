@@ -6,7 +6,7 @@ export const CartContextConsumer = CartContext.Consumer;
 
 export class CartContextProvider extends React.Component {
   state = {
-    updateItems: updatedCartItems =>
+    updateCartItems: updatedCartItems =>
       this.setState({ cartItems: updatedCartItems }),
     emptyCartAfterOrder: () => this.setState({ cartItems: [] }),
     addItemToCart: async productId => {
