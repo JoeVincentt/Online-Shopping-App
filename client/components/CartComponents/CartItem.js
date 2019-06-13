@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { CardItem, Thumbnail, Left, Body, Right, Item } from "native-base";
 import SimpleButton from "../Buttons/SimpleButton";
@@ -6,6 +6,7 @@ import { TitleText, ContentBoldText, ContentLightText } from "../StyledText";
 import colors from "../../constants/Colors";
 
 export default props => {
+  const [productInfoModalOpen, setProductInfoModalOpen] = useState(false);
   return (
     <>
       <CardItem>
@@ -20,9 +21,7 @@ export default props => {
           <Body>
             <Item style={{ justifyContent: "space-between" }}>
               <View style={{ width: "80%" }}>
-                <TouchableOpacity
-                  onPress={() => props.openProductModal(props.id)}
-                >
+                <TouchableOpacity onPress={() => setProductInfoModalOpen(true)}>
                   <TitleText style={{ fontSize: 25 }}>
                     {props.productName}
                   </TitleText>
@@ -56,6 +55,16 @@ export default props => {
         </Left>
         <Right />
       </CardItem>
+      {/* Modal */}
+      {productInfoModalOpen && (
+        <ProductInfoModal
+          openProductInfoModal={productInfoModalOpen}
+          setProductInfoModalOpen={setProductInfoModalOpen}
+          productId={props.id}
+        />
+      )}
+
+      {/* Modal */}
     </>
   );
 };

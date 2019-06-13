@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { CardItem, Thumbnail, Left, Body, Right, Item } from "native-base";
 import SimpleButton from "../Buttons/SimpleButton";
@@ -10,6 +10,8 @@ import { CartContext } from "../../context/CartContext";
 export default props => {
   const {} = useContext(UserProfileContext);
   const {} = useContext(CartContext);
+
+  const [productInfoModalOpen, setProductInfoModalOpen] = useState(false);
 
   return (
     <>
@@ -25,9 +27,7 @@ export default props => {
           <Body>
             <Item style={{ justifyContent: "space-between" }}>
               <View style={{ width: "80%" }}>
-                <TouchableOpacity
-                  onPress={() => props.openProductModal(props.id)}
-                >
+                <TouchableOpacity onPress={() => setProductInfoModalOpen(true)}>
                   <TitleText style={{ fontSize: 25 }}>
                     {props.productName}
                   </TitleText>
@@ -65,12 +65,22 @@ export default props => {
               props.addItemToCart(props.id);
               props.deleteItem(props.id);
             }}
-            text="Add To Cart"
+            text="ADD TO CART"
             style={{ borderColor: colors.secondary }}
             textStyle={{ fontSize: 16, padding: 5 }}
           />
         </Right>
       </CardItem>
+      {/* Modal */}
+      {productInfoModalOpen && (
+        <ProductInfoModal
+          openProductInfoModal={productInfoModalOpen}
+          setProductInfoModalOpen={setProductInfoModalOpen}
+          productId={props.id}
+        />
+      )}
+
+      {/* Modal */}
     </>
   );
 };

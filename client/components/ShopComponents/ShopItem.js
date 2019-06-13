@@ -1,17 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Image, View, StyleSheet, TouchableOpacity } from "react-native";
-import {
-  Card,
-  CardItem,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right,
-  Item
-} from "native-base";
+import { Card, CardItem, Icon, Left, Body } from "native-base";
 
+import ProductInfoModal from "../ProductComponents/ProductInfoModal";
 import SimpleButton from "../Buttons/SimpleButton";
 import { CartContext } from "../../context/CartContext";
 import { UserProfileContext } from "../../context/UserProfileContext";
@@ -32,81 +23,98 @@ export default (ShopItem = ({
   const { addItemToCart } = useContext(CartContext);
   const { addItemToFavorite } = useContext(UserProfileContext);
 
+  const [productInfoModalOpen, setProductInfoModalOpen] = useState(false);
+
   return (
-    <Card>
-      <CardItem cardBody>
-        <Image
-          source={{
-            uri: imageUrl
-          }}
-          style={{ height: 250, width: null, flex: 1 }}
-        />
-      </CardItem>
-      <CardItem>
-        <Left>
-          <Body>
-            <View style={styles.priceAndStockContainer}>
-              <TitleText style={{ fontSize: 45, color: colors.secondary }}>
-                {price} $
-              </TitleText>
-              <ContentBoldText
-                style={{
-                  fontSize: 15,
-                  color:
-                    availability === "In Stock"
-                      ? colors.secondary
-                      : colors.danger
-                }}
-              >
-                {availability}
-              </ContentBoldText>
-            </View>
-
-            <TouchableOpacity onPress={() => console.log("open product modal")}>
-              <TitleText style={{ fontSize: 25 }}>
-                {truncateString(name, 75)}
-              </TitleText>
-              <ContentLightText style={{}}>
-                {truncateString(description, 300)}
-              </ContentLightText>
-            </TouchableOpacity>
-          </Body>
-        </Left>
-      </CardItem>
-
-      <View style={styles.buttonPanel}>
-        <TouchableOpacity onPress={() => console.log("product liked")}>
-          <View style={styles.buttonContainer}>
-            <Icon
-              name="thumbs-up"
-              style={{ margin: 10, color: colors.secondary }}
-            />
-            <ContentBoldText>{likes.toString()}</ContentBoldText>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log("open comments modal")}>
-          <View style={styles.buttonContainer}>
-            <Icon name="people" style={{ margin: 10, color: colors.warning }} />
-            <ContentBoldText>{comments.toString()}</ContentBoldText>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => addItemToFavorite(id)}>
-          <View style={styles.buttonContainer}>
-            <Icon name="heart" style={{ margin: 10, color: colors.danger }} />
-          </View>
-        </TouchableOpacity>
-
-        <View>
-          <SimpleButton
-            onPress={() => {
-              addItemToCart(id);
+    <>
+      <Card>
+        <CardItem cardBody>
+          <Image
+            source={{
+              uri: imageUrl
             }}
-            text="Add to Cart"
-            textStyle={{ fontSize: 20, padding: 5 }}
+            style={{ height: 250, width: null, flex: 1 }}
           />
+        </CardItem>
+        <CardItem>
+          <Left>
+            <Body>
+              <View style={styles.priceAndStockContainer}>
+                <TitleText style={{ fontSize: 45, color: colors.secondary }}>
+                  {price} $
+                </TitleText>
+                <ContentBoldText
+                  style={{
+                    fontSize: 15,
+                    color:
+                      availability === "In Stock"
+                        ? colors.secondary
+                        : colors.danger
+                  }}
+                >
+                  {availability}
+                </ContentBoldText>
+              </View>
+
+              <TouchableOpacity onPress={() => setProductInfoModalOpen(true)}>
+                <TitleText style={{ fontSize: 25 }}>
+                  {truncateString(name, 75)}
+                </TitleText>
+                <ContentLightText style={{}}>
+                  {truncateString(description, 300)}
+                </ContentLightText>
+              </TouchableOpacity>
+            </Body>
+          </Left>
+        </CardItem>
+
+        <View style={styles.buttonPanel}>
+          <TouchableOpacity onPress={() => console.log("product liked")}>
+            <View style={styles.buttonContainer}>
+              <Icon
+                name="thumbs-up"
+                style={{ margin: 10, color: colors.secondary }}
+              />
+              <ContentBoldText>{likes.toString()}</ContentBoldText>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => console.log("open comments modal")}>
+            <View style={styles.buttonContainer}>
+              <Icon
+                name="people"
+                style={{ margin: 10, color: colors.warning }}
+              />
+              <ContentBoldText>{comments.toString()}</ContentBoldText>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => addItemToFavorite(id)}>
+            <View style={styles.buttonContainer}>
+              <Icon name="heart" style={{ margin: 10, color: colors.danger }} />
+            </View>
+          </TouchableOpacity>
+
+          <View>
+            <SimpleButton
+              onPress={() => {
+                addItemToCart(id);
+              }}
+              text="ADD TO CART"
+              textStyle={{ fontSize: 20, padding: 5 }}
+            />
+          </View>
         </View>
-      </View>
-    </Card>
+      </Card>
+      {/* Modal */}
+      {productInfoModalOpen && (
+        <ProductInfoModal
+          openProductInfoModal={productInfoModalOpen}
+          setProductInfoModalOpen={setProductInfoModalOpen}
+          productId={id}
+        />
+      )}
+
+      {/* Modal */}
+    </>
   );
 });
 

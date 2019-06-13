@@ -22,10 +22,6 @@ export default () => {
     };
   }, []);
 
-  const openProductModal = () => {
-    console.log("open product modal");
-  };
-
   const deleteItem = productId => {
     const updatedFavoriteProducts = favoriteProducts.filter(
       product => product.id !== productId
@@ -47,7 +43,6 @@ export default () => {
           productPrice={product.productPrice}
           deleteItem={deleteItem}
           addItemToCart={addItemToCart}
-          openProductModal={openProductModal}
         />
       </Card>
     ));

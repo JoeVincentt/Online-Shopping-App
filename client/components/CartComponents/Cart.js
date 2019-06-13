@@ -41,10 +41,6 @@ export default () => {
     emptyCartAfterOrder();
   };
 
-  const openProductModal = () => {
-    console.log("open product modal");
-  };
-
   const deleteItem = productId => {
     const updatedCartItems = cartItems.filter(
       product => product.id !== productId
@@ -65,7 +61,6 @@ export default () => {
           productQuantity={product.productQuantity}
           productPrice={product.productPrice}
           deleteItem={deleteItem}
-          openProductModal={openProductModal}
         />
       </Card>
     ));
