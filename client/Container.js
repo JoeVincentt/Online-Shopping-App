@@ -99,32 +99,31 @@ class App extends React.Component {
                 </Header>
 
                 <View style={{ flex: 1 }}>{this.renderContent()}</View>
-                {showFooter && (
-                  <Footer
-                    style={{
-                      height: Platform.OS === "android" && height * 0.15,
 
-                      backgroundColor: colors.defaultBackgroundColor
+                <Footer
+                  style={{
+                    height: Platform.OS === "android" && height * 0.15,
+
+                    backgroundColor: colors.defaultBackgroundColor
+                  }}
+                >
+                  <Animated.View
+                    style={{
+                      flex: 1,
+                      transform: [
+                        {
+                          translateY: footerY
+                        }
+                      ]
                     }}
                   >
-                    <Animated.View
-                      style={{
-                        flex: 1,
-                        transform: [
-                          {
-                            translateY: footerY
-                          }
-                        ]
-                      }}
-                    >
-                      <TabNavigation
-                        loggedIn={this.state.loggedIn}
-                        activeTab={this.state.activeTab}
-                        onPress={this.navigation}
-                      />
-                    </Animated.View>
-                  </Footer>
-                )}
+                    <TabNavigation
+                      loggedIn={this.state.loggedIn}
+                      activeTab={this.state.activeTab}
+                      onPress={this.navigation}
+                    />
+                  </Animated.View>
+                </Footer>
               </Container>
             )}
           </ShopContextProvider>

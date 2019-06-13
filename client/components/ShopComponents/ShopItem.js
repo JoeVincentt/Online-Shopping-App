@@ -21,6 +21,8 @@ import colors from "../../constants/Colors";
 export default (ShopItem = ({
   id,
   name,
+  price,
+  availability,
   description,
   imageUrl,
   comments,
@@ -44,12 +46,29 @@ export default (ShopItem = ({
           source={{
             uri: imageUrl
           }}
-          style={{ height: 200, width: null, flex: 1 }}
+          style={{ height: 250, width: null, flex: 1 }}
         />
       </CardItem>
       <CardItem>
         <Left>
           <Body>
+            <View style={styles.priceAndStockContainer}>
+              <TitleText style={{ fontSize: 45, color: colors.secondary }}>
+                {price} $
+              </TitleText>
+              <ContentBoldText
+                style={{
+                  fontSize: 15,
+                  color:
+                    availability === "In Stock"
+                      ? colors.secondary
+                      : colors.danger
+                }}
+              >
+                {availability}
+              </ContentBoldText>
+            </View>
+
             <TouchableOpacity onPress={() => console.log("open product modal")}>
               <TitleText style={{ fontSize: 25 }}>{name}</TitleText>
               <ContentLightText style={{}}>
@@ -97,6 +116,11 @@ export default (ShopItem = ({
 });
 
 const styles = StyleSheet.create({
+  priceAndStockContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
   buttonPanel: {
     justifyContent: "space-evenly",
     alignItems: "center",

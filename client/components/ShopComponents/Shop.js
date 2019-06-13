@@ -1,18 +1,10 @@
 import React, { useContext } from "react";
-import {
-  View,
-  ScrollView,
-  TouchableOpacity,
-  FlatList,
-  Text
-} from "react-native";
+import { View, ScrollView, FlatList } from "react-native";
 import { Spinner } from "native-base";
 
 import ShopCategories from "./ShopCategories";
 import ShopItem from "./ShopItem";
-import { MarijuanaText } from "../StyledText";
 import { ShopContext } from "../../context/ShopContext";
-import { UIContext } from "../../context/UIContext";
 
 export default (Shop = () => {
   const {
@@ -22,7 +14,6 @@ export default (Shop = () => {
     categories,
     activeCategory
   } = useContext(ShopContext);
-  const { setShowFooter } = useContext(UIContext);
 
   const renderCategoriesBar = () => {
     return categories.map((category, index) => (
@@ -61,6 +52,8 @@ export default (Shop = () => {
             <ShopItem
               id={item.id}
               name={item.name}
+              price={item.price}
+              availability={item.availability}
               description={item.description}
               imageUrl={item.imageUrl}
               likes={item.likes.length}

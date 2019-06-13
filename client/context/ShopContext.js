@@ -14,10 +14,11 @@ export class ShopContextProvider extends React.Component {
         name:
           "All-New Echo Dot Kids Edition, an Echo designed for kids, Rainbow",
         price: 16,
+        availability: "Out of Stock",
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         imageUrl:
-          "https://cdn.pixabay.com/photo/2013/04/07/21/30/croissant-101636_1280.jpg",
+          "https://images-na.ssl-images-amazon.com/images/I/71TzCLRzYAL._SL1500_.jpg",
         likes: [],
         comments: []
       },
@@ -26,6 +27,7 @@ export class ShopContextProvider extends React.Component {
         name:
           "Ring Alarm 5 Piece Kit – Smart Home Security System – Works with Alexa",
         price: 16,
+        availability: "In Stock",
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         imageUrl:
