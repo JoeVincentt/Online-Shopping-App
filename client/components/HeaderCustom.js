@@ -4,12 +4,42 @@ import { Body } from "native-base";
 import { MarijuanaText } from "../components/StyledText";
 import colors from "../constants/Colors";
 
-export default () => (
-  <>
-    <Body style={{ flex: 1, zIndex: 100 }}>
+export default ({ activeTab }) => {
+  let customHeader;
+  if (activeTab === "auth") {
+    customHeader = (
       <MarijuanaText style={{ fontSize: 70, color: colors.secondary }}>
-        Store Name
+        {activeTab}
       </MarijuanaText>
-    </Body>
-  </>
-);
+    );
+  }
+  if (activeTab === "profile") {
+    customHeader = (
+      <MarijuanaText style={{ fontSize: 70, color: colors.secondary }}>
+        {activeTab}
+      </MarijuanaText>
+    );
+  }
+  if (activeTab === "shop") {
+    customHeader = (
+      <MarijuanaText style={{ fontSize: 70, color: colors.secondary }}>
+        {activeTab}
+      </MarijuanaText>
+    );
+  }
+  if (activeTab === "favorite") {
+    customHeader = (
+      <MarijuanaText style={{ fontSize: 70, color: colors.secondary }}>
+        {activeTab}
+      </MarijuanaText>
+    );
+  }
+  if (activeTab === "cart") {
+    customHeader = (
+      <MarijuanaText style={{ fontSize: 70, color: colors.secondary }}>
+        {activeTab}
+      </MarijuanaText>
+    );
+  }
+  return <Body style={{ flex: 1, zIndex: 100 }}>{customHeader}</Body>;
+};

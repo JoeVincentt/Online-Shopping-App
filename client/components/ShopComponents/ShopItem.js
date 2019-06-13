@@ -16,6 +16,7 @@ import SimpleButton from "../Buttons/SimpleButton";
 import { CartContext } from "../../context/CartContext";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { TitleText, ContentLightText, ContentBoldText } from "../StyledText";
+import { truncateString } from "../../util/truncateString";
 import colors from "../../constants/Colors";
 
 export default (ShopItem = ({
@@ -31,14 +32,6 @@ export default (ShopItem = ({
   const { addItemToCart } = useContext(CartContext);
   const { addItemToFavorite } = useContext(UserProfileContext);
 
-  const shortDescription = () => {
-    let newShortDescription = description.substring(0, 200);
-    if (newShortDescription.length > 0) {
-      newShortDescription = newShortDescription + "...";
-    }
-
-    return newShortDescription;
-  };
   return (
     <Card>
       <CardItem cardBody>
@@ -70,9 +63,11 @@ export default (ShopItem = ({
             </View>
 
             <TouchableOpacity onPress={() => console.log("open product modal")}>
-              <TitleText style={{ fontSize: 25 }}>{name}</TitleText>
+              <TitleText style={{ fontSize: 25 }}>
+                {truncateString(name, 75)}
+              </TitleText>
               <ContentLightText style={{}}>
-                {shortDescription()}
+                {truncateString(description, 300)}
               </ContentLightText>
             </TouchableOpacity>
           </Body>

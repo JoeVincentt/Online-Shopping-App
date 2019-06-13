@@ -69,9 +69,10 @@ class App extends React.Component {
   };
 
   render() {
-    let { showFooter, footerY } = this.context;
+    const { footerY } = this.context;
+    const { activeTab, isLoadingComplete } = this.state;
 
-    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
+    if (!isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <AppLoading
           startAsync={this._loadResourcesAsync}
@@ -88,33 +89,22 @@ class App extends React.Component {
             ) : (
               <Container>
                 {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-                <Header
-                  style={{
-                    backgroundColor: colors.defaultBackgroundColor,
-                    paddingTop: getStatusBarHeight(),
-                    height: 54 + getStatusBarHeight()
-                  }}
-                >
-                  <HeaderCustom />
+                <Header style={styles.headerStyle}>
+                  <HeaderCustom activeTab={activeTab} />
                 </Header>
 
                 <View style={{ flex: 1 }}>{this.renderContent()}</View>
 
                 <Footer
                   style={{
-                    height: Platform.OS === "android" && height * 0.15,
-
+                    height: Platform.OS === "android" && height * 0.12,
                     backgroundColor: colors.defaultBackgroundColor
                   }}
                 >
                   <Animated.View
                     style={{
                       flex: 1,
-                      transform: [
-                        {
-                          translateY: footerY
-                        }
-                      ]
+                      transform: [{ translateY: footerY }]
                     }}
                   >
                     <TabNavigation
@@ -162,4 +152,13 @@ class App extends React.Component {
 }
 
 export default App;
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  headerStyle: {
+    backgroundColor: colors.defaultBackgroundColor,
+    paddingTop: Platform.OS === "ios" ? 10 : getStatusBarHeight(),
+    height:
+      Platform.OS === "ios"
+        ? 24 + getStatusBarHeight()
+        : 54 + getStatusBarHeight()
+  }
+});
