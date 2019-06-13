@@ -21,7 +21,7 @@ export default props => {
             <Item style={{ justifyContent: "space-between" }}>
               <View style={{ width: "80%" }}>
                 <TouchableOpacity
-                  onLongPress={() => props.openProductModal(props.id)}
+                  onPress={() => props.openProductModal(props.id)}
                 >
                   <TitleText style={{ fontSize: 25 }}>
                     {props.productName}

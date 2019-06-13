@@ -45,6 +45,22 @@ export class UserProfileContextProvider extends React.Component {
       this.setState({ favoriteProducts }),
     updateFavoriteItems: updatedFavoriteProducts =>
       this.setState({ favoriteProducts: updatedFavoriteProducts }),
+    addItemToFavorite: async productId => {
+      //call to API to fetch product
+      //get product and update favoriteProducts
+      //go thru items and check if there items with the same id and if so to increment amount instead adding one mor product
+      const addedProduct = {
+        id: 12,
+        productName: "added product",
+        productDescription: "added is an amazing product cool",
+        productImage:
+          "https://cdn.pixabay.com/photo/2013/04/07/21/30/croissant-101636_1280.jpg",
+        productQuantity: 11,
+        productPrice: 44
+      };
+      await this.state.favoriteProducts.unshift(addedProduct);
+      this.setState({ favoriteProducts: this.state.favoriteProducts });
+    },
     //make a call to API to update favorite items
     orders: [
       {

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Card } from "native-base";
+import React, { useContext, useEffect, useState } from "react";
+import { Card, Spinner } from "native-base";
 import { View, ScrollView } from "react-native";
 
 import { MarijuanaText } from "../StyledText";
@@ -8,30 +8,22 @@ import { UserProfileContext } from "../../context/UserProfileContext";
 import { CartContext } from "../../context/CartContext";
 
 export default () => {
+  const [loading, setLoading] = useState(true);
+
   const { favoriteProducts, updateFavoriteItems } = useContext(
     UserProfileContext
   );
-  const { cartItems, updateItems } = useContext(CartContext);
+  const { addItemToCart } = useContext(CartContext);
+
+  useEffect(() => {
+    setLoading(false);
+    return () => {
+      // Clean up the subscription
+    };
+  }, []);
 
   const openProductModal = () => {
     console.log("open product modal");
-  };
-
-  const addItemToCart = async productId => {
-    //call to API to fetch product
-    //get product and update cartItems
-    //go thru items and check if there items with the same id and if so to increment amount instead adding one mor product
-    const addedProduct = {
-      id: 12,
-      productName: "added product",
-      productDescription: "added is an amazing product cool",
-      productImage:
-        "https://cdn.pixabay.com/photo/2013/04/07/21/30/croissant-101636_1280.jpg",
-      productQuantity: 11,
-      productPrice: 44
-    };
-    await cartItems.unshift(addedProduct);
-    updateItems(cartItems);
   };
 
   const deleteItem = productId => {
@@ -61,21 +53,25 @@ export default () => {
     ));
   };
 
-  return (
-    <View style={{ flex: 1 }}>
-      {favoriteProducts.length <= 0 ? (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <MarijuanaText> Empty </MarijuanaText>
-        </View>
-      ) : (
-        <ScrollView>{renderProducts()}</ScrollView>
-      )}
-    </View>
-  );
+  if (loading) {
+    return <Spinner />;
+  } else {
+    return (
+      <View style={{ flex: 1 }}>
+        {favoriteProducts.length <= 0 ? (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <MarijuanaText> Empty </MarijuanaText>
+          </View>
+        ) : (
+          <ScrollView>{renderProducts()}</ScrollView>
+        )}
+      </View>
+    );
+  }
 };

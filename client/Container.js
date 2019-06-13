@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity
 } from "react-native";
-import { Container, Header, Content, Footer } from "native-base";
+import { Container, Header, Content, Footer, Spinner } from "native-base";
 import { AppLoading, Asset, Font, Icon } from "expo";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 
@@ -21,13 +21,19 @@ import TabNavigation from "./navigation/TabNavigation";
 import HeaderCustom from "./components/HeaderCustom";
 import colors from "./constants/Colors";
 import { CartContextProvider } from "./context/CartContext";
+import { ShopContextProvider } from "./context/ShopContext";
 
 class App extends React.Component {
   state = {
     isLoadingComplete: false,
     activeTab: "shop",
-    loggedIn: true
+    loggedIn: true,
+    loading: true
   };
+
+  componentDidMount() {
+    this.setState({ loading: false });
+  }
 
   navigation = tabToNavigate => this.setState({ activeTab: tabToNavigate });
 
@@ -71,33 +77,40 @@ class App extends React.Component {
     } else {
       return (
         <CartContextProvider>
-          <Container>
-            {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-            <Header
-              style={{
-                backgroundColor: colors.defaultBackgroundColor,
-                paddingTop: getStatusBarHeight(),
-                height: 54 + getStatusBarHeight()
-              }}
-            >
-              <HeaderCustom />
-            </Header>
+          <ShopContextProvider>
+            {this.state.loading ? (
+              <Spinner />
+            ) : (
+              <Container>
+                {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+                <Header
+                  style={{
+                    backgroundColor: colors.defaultBackgroundColor,
+                    paddingTop: getStatusBarHeight(),
+                    height: 54 + getStatusBarHeight()
+                  }}
+                >
+                  <HeaderCustom />
+                </Header>
 
-            <View style={{ flex: 1 }}>{this.renderContent()}</View>
+                <View style={{ flex: 1 }}>{this.renderContent()}</View>
 
-            <Footer
-              style={{
-                height: Platform.OS === "ios" ? height * 0.1 : height * 0.15,
-                backgroundColor: colors.defaultBackgroundColor
-              }}
-            >
-              <TabNavigation
-                loggedIn={this.state.loggedIn}
-                activeTab={this.state.activeTab}
-                onPress={this.navigation}
-              />
-            </Footer>
-          </Container>
+                <Footer
+                  style={{
+                    height:
+                      Platform.OS === "ios" ? height * 0.1 : height * 0.15,
+                    backgroundColor: colors.defaultBackgroundColor
+                  }}
+                >
+                  <TabNavigation
+                    loggedIn={this.state.loggedIn}
+                    activeTab={this.state.activeTab}
+                    onPress={this.navigation}
+                  />
+                </Footer>
+              </Container>
+            )}
+          </ShopContextProvider>
         </CartContextProvider>
       );
     }

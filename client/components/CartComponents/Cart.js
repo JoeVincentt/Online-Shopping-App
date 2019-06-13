@@ -20,8 +20,8 @@ export default () => {
         cartItems[index].productPrice * cartItems[index].productQuantity;
     }
     Alert.alert(
-      `Total: ${totalPrice}`,
-      "Please Confirm Your Order",
+      `Total: ${totalPrice} $`,
+      "Please Confirm Your Order:",
       [
         {
           text: "Cancel",

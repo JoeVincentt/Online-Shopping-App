@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, TouchableOpacity } from "react-native";
 
 import { TitleText } from "../StyledText";
 import colors from "../../constants/Colors";
+import { ShopContext } from "../../context/ShopContext";
 
 export default (Shop = ({
   categoryName,
   categorySubName,
   activeCategory,
-  index,
-  setActiveCategory
+  index
 }) => {
+  const { setActiveCategory } = useContext(ShopContext);
   return (
     <View
       style={{
