@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Card } from "native-base";
 import { View, Alert, ScrollView } from "react-native";
+import * as SecureStore from "expo-secure-store";
 
 import SimpleButton from "../Buttons/SimpleButton";
 import { MarijuanaText } from "../StyledText";
@@ -17,14 +18,33 @@ export default () => {
     UserProfileContext
   );
 
-  const orderNow = () => {
+  const orderNow = async () => {
+    let savedCard = await SecureStore.getItemAsync("PaymentMethod");
+    if (savedCard !== null) {
+      savedCard = await JSON.parse(savedCard);
+    } else {
+      return Alert.alert(
+        "Error",
+        "No payment method \n Please add one",
+        [
+          {
+            text: "Cancel",
+            onPress: () => {},
+            style: "cancel"
+          }
+        ],
+        { cancelable: false }
+      );
+    }
     let totalPrice = 0;
     for (let index = 0; index < cartItems.length; index++) {
       totalPrice +=
         cartItems[index].productPrice * cartItems[index].productQuantity;
     }
     Alert.alert(
-      `Total: ${totalPrice} $ \n\n Please Confirm Your Order: \n\n Username: ${username} \n Full Name: ${fullName} \n Address: ${address} \n Phone Number: ${phoneNumber}`,
+      `Total: ${totalPrice} $ \n\n Please Confirm Your Order: \n\n Username: ${username} \n Full Name: ${fullName} \n Address: ${address} \n Phone Number: ${phoneNumber} \n\n Card Number: ${
+        savedCard.cardNumber
+      } \n Expiration: ${savedCard.expirationDate} \n CVV: ${savedCard.cvv}`,
       ``,
       [
         {

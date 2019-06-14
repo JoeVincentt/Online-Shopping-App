@@ -42,7 +42,6 @@ export default class Payments extends Component {
       expirationDate: "",
       cvv: ""
     });
-    console.log("clear card info");
   };
   saveCardInformation = async () => {
     const card = {
@@ -51,7 +50,6 @@ export default class Payments extends Component {
       cvv: this.state.cvv
     };
     await SecureStore.setItemAsync("PaymentMethod", JSON.stringify(card));
-    console.log("save card info");
   };
 
   render() {
