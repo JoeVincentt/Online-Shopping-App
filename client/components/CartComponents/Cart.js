@@ -7,10 +7,14 @@ import { MarijuanaText } from "../StyledText";
 import colors from "../../constants/Colors";
 import CartItem from "./CartItem";
 import { CartContext } from "../../context/CartContext";
+import { UserProfileContext } from "../../context/UserProfileContext";
 
 export default () => {
   const { cartItems, updateItems, emptyCartAfterOrder } = useContext(
     CartContext
+  );
+  const { username, fullName, address, phoneNumber } = useContext(
+    UserProfileContext
   );
 
   const orderNow = () => {
@@ -20,12 +24,12 @@ export default () => {
         cartItems[index].productPrice * cartItems[index].productQuantity;
     }
     Alert.alert(
-      `Total: ${totalPrice} $`,
-      "Please Confirm Your Order:",
+      `Total: ${totalPrice} $ \n\n Please Confirm Your Order: \n\n Username: ${username} \n Full Name: ${fullName} \n Address: ${address} \n Phone Number: ${phoneNumber}`,
+      ``,
       [
         {
           text: "Cancel",
-          onPress: () => console.log("Cancel Pressed")
+          onPress: () => {}
         },
         {
           text: "Confirm",
@@ -38,6 +42,7 @@ export default () => {
   };
 
   const confirmOrder = () => {
+    //update Orders
     emptyCartAfterOrder();
   };
 
@@ -72,7 +77,7 @@ export default () => {
         <ScrollView>
           <SimpleButton
             onPress={orderNow}
-            text="Order Now"
+            text="ORDER NOW"
             style={{
               borderColor: colors.secondary
             }}
@@ -81,7 +86,7 @@ export default () => {
           <View>{renderProducts()}</View>
           <SimpleButton
             onPress={orderNow}
-            text="Order Now"
+            text="ORDER NOW"
             style={{
               borderColor: colors.danger
             }}

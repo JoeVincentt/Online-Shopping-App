@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Item } from "native-base";
 import { View } from "react-native";
 
-import { TitleText } from "../../StyledText";
+import { TitleText, MarijuanaText } from "../../StyledText";
 import colors from "../../../constants/Colors";
 import SimpleButton from "../../Buttons/SimpleButton";
 import Order from "./Order";
@@ -81,13 +81,27 @@ export default () => {
     });
   };
 
-  return (
-    <>
-      <View style={{ alignSelf: "flex-start", paddingTop: 20 }}>
-        <TitleText>Orders</TitleText>
+  if (orders.length > 0) {
+    return (
+      <>
+        <View style={{ alignSelf: "flex-start", paddingTop: 20 }}>
+          <TitleText>Orders</TitleText>
+        </View>
+        <View>{renderOrders(orders)}</View>
+      </>
+    );
+  } else {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: 20
+        }}
+      >
+        <MarijuanaText>Empty</MarijuanaText>
       </View>
-      {/* Order */}
-      <View>{renderOrders(orders)}</View>
-    </>
-  );
+    );
+  }
 };

@@ -10,6 +10,8 @@ import {
 } from "native-base";
 import { View, Text } from "react-native";
 
+import * as SecureStore from "expo-secure-store";
+
 import colors from "../../constants/Colors";
 import SimpleButton from "../Buttons/SimpleButton";
 import { TitleText, ContentBoldText } from "../StyledText";
@@ -21,10 +23,34 @@ export default class Payments extends Component {
     rememberCard: true
   };
 
-  clearCardInformation = () => {
+  async componentDidMount() {
+    let savedCard = await SecureStore.getItemAsync("PaymentMethod");
+    if (savedCard !== null) {
+      savedCard = await JSON.parse(savedCard);
+      this.setState({
+        cardNumber: savedCard.cardNumber,
+        expirationDate: savedCard.expirationDate,
+        cvv: savedCard.cvv
+      });
+    }
+  }
+
+  clearCardInformation = async () => {
+    await SecureStore.deleteItemAsync("PaymentMethod");
+    this.setState({
+      cardNumber: "",
+      expirationDate: "",
+      cvv: ""
+    });
     console.log("clear card info");
   };
-  saveCardInformation = () => {
+  saveCardInformation = async () => {
+    const card = {
+      cardNumber: this.state.cardNumber,
+      expirationDate: this.state.expirationDate,
+      cvv: this.state.cvv
+    };
+    await SecureStore.setItemAsync("PaymentMethod", JSON.stringify(card));
     console.log("save card info");
   };
 
