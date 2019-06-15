@@ -29,7 +29,7 @@ class App extends React.Component {
   static contextType = UIContext;
   state = {
     isLoadingComplete: false,
-    activeTab: "auth",
+    activeTab: "shop",
     loggedIn: false,
     loading: true
   };

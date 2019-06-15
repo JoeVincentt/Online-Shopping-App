@@ -148,19 +148,6 @@ export default (ProductInfoModal = ({
                   </ContentBoldText>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => console.log("open comments modal")}
-              >
-                <View style={styles.buttonContainer}>
-                  <Icon
-                    name="people"
-                    style={{ margin: 10, color: colors.warning }}
-                  />
-                  <ContentBoldText>
-                    {productInfo.comments.length.toString()}
-                  </ContentBoldText>
-                </View>
-              </TouchableOpacity>
 
               {signedIn && (
                 <>

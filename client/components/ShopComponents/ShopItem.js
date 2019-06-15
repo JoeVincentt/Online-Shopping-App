@@ -3,6 +3,7 @@ import { Image, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Card, CardItem, Icon, Left, Body } from "native-base";
 
 import ProductInfoModal from "../ProductComponents/ProductInfoModal";
+import ProductCommentsModal from "../ProductComponents/ProductCommentsModal";
 import SimpleButton from "../Buttons/SimpleButton";
 import { CartContext } from "../../context/CartContext";
 import { UserProfileContext } from "../../context/UserProfileContext";
@@ -24,6 +25,9 @@ export default (ShopItem = ({
   const { addItemToFavorite, signedIn } = useContext(UserProfileContext);
 
   const [productInfoModalOpen, setProductInfoModalOpen] = useState(false);
+  const [productCommentsModalOpen, setProductCommentsModalOpen] = useState(
+    false
+  );
 
   return (
     <>
@@ -78,7 +82,7 @@ export default (ShopItem = ({
               <ContentBoldText>{likes.toString()}</ContentBoldText>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log("open comments modal")}>
+          <TouchableOpacity onPress={() => setProductCommentsModalOpen(true)}>
             <View style={styles.buttonContainer}>
               <Icon
                 name="people"
@@ -116,6 +120,14 @@ export default (ShopItem = ({
         <ProductInfoModal
           openProductInfoModal={productInfoModalOpen}
           setProductInfoModalOpen={setProductInfoModalOpen}
+          productId={id}
+        />
+      )}
+
+      {productCommentsModalOpen && (
+        <ProductCommentsModal
+          openProductCommentsModal={productCommentsModalOpen}
+          setProductCommentsModalOpen={setProductCommentsModalOpen}
           productId={id}
         />
       )}
