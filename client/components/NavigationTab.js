@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import { Text, StyleSheet } from "react-native";
 import { Button, Icon, Badge } from "native-base";
 import { ContentLightText } from "../components/StyledText";
@@ -7,7 +7,9 @@ import colors from "../constants/Colors";
 const Tab = props => {
   return (
     <Button
-      onPress={() => props.onPress(props.navigateTo)}
+      onPress={() => {
+        props.onPress(props.navigateTo);
+      }}
       style={
         props.active
           ? {

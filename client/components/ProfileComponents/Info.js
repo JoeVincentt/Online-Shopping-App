@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { Container, Header, Content, Item, Input, Icon } from "native-base";
+import { Item, Input, Icon } from "native-base";
 import { View } from "react-native";
 
 import { TitleText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
 import colors from "../../constants/Colors";
 import { UserProfileContext } from "../../context/UserProfileContext";
+import { UIContext } from "../../context/UIContext";
 export default props => {
   const {
     username,
@@ -19,13 +20,15 @@ export default props => {
     setPhoneNumber,
     setAddress
   } = useContext(UserProfileContext);
+  const { slideInComponent, slideInFooter } = useContext(UIContext);
 
   const saveProfile = () => {
-    console.log("save profile");
+    //Make API call to set user Profile
   };
   const logOut = () => {
     props.logOut();
-    console.log("logout");
+    slideInFooter();
+    slideInComponent();
     //clear user data
   };
 

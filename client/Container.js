@@ -29,8 +29,8 @@ class App extends React.Component {
   static contextType = UIContext;
   state = {
     isLoadingComplete: false,
-    activeTab: "shop",
-    loggedIn: true,
+    activeTab: "auth",
+    loggedIn: false,
     loading: true
   };
 
@@ -69,7 +69,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { footerY } = this.context;
+    const { footerY, productsX } = this.context;
     const { activeTab, isLoadingComplete } = this.state;
 
     if (!isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -93,7 +93,11 @@ class App extends React.Component {
                   <HeaderCustom activeTab={activeTab} />
                 </Header>
 
-                <View style={{ flex: 1 }}>{this.renderContent()}</View>
+                <Animated.View
+                  style={{ flex: 1, transform: [{ translateX: productsX }] }}
+                >
+                  {this.renderContent()}
+                </Animated.View>
 
                 <Footer
                   style={{

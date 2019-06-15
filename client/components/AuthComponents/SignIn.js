@@ -6,10 +6,12 @@ import { TitleText, ContentLightText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { CartContext } from "../../context/CartContext";
+import { UIContext } from "../../context/UIContext";
 
 export default (SignIn = props => {
   const { setSignIn } = useContext(UserProfileContext);
   const { updateCartItems } = useContext(CartContext);
+  const { slideInFooter, slideInComponent } = useContext(UIContext);
   //create State for login
 
   const signIn = () => {
@@ -27,6 +29,8 @@ export default (SignIn = props => {
       );
       updateCartItems([]);
       props.logIn();
+      slideInFooter();
+      slideInComponent();
     }, 400);
   };
 
@@ -34,17 +38,17 @@ export default (SignIn = props => {
     <>
       <Form>
         <View style={{ height: 30 }} />
-        <Item stackedLabel last>
-          <View style={styles.inputLabel}>
-            <TitleText>Email</TitleText>
-          </View>
+        <View style={styles.inputLabel}>
+          <TitleText>Email</TitleText>
+        </View>
+        <Item stackedLabel>
           <Input style={styles.inputField} />
         </Item>
         <View style={{ height: 30 }} />
-        <Item stackedLabel last>
-          <View style={styles.inputLabel}>
-            <TitleText>Password</TitleText>
-          </View>
+        <View style={styles.inputLabel}>
+          <TitleText>Password</TitleText>
+        </View>
+        <Item stackedLabel>
           <Input secureTextEntry style={styles.inputField} />
         </Item>
       </Form>
@@ -55,10 +59,12 @@ export default (SignIn = props => {
 
 const styles = StyleSheet.create({
   inputLabel: {
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
+    marginLeft: 20
   },
   inputField: {
     fontFamily: "sans-light",
-    fontSize: 20
+    fontSize: 20,
+    height: 30
   }
 });

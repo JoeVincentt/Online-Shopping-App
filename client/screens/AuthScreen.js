@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, View, StyleSheet } from "react-native";
+import { TouchableOpacity, View, StyleSheet, ScrollView } from "react-native";
 
 import {
   ContentItalicText,
@@ -27,7 +27,7 @@ export default class AuthScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
         <View style={{ paddingHorizontal: 30 }}>{this.renderComponent()}</View>
 
         <View style={styles.switchTextContainer}>
@@ -42,7 +42,7 @@ export default class AuthScreen extends Component {
             </ContentBoldText>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
