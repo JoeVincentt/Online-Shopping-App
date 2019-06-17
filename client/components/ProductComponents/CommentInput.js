@@ -4,6 +4,7 @@ import StarRating from "react-native-star-rating";
 import SimpleButton from "../Buttons/SimpleButton";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { ShopContext } from "../../context/ShopContext";
+import { height } from "../../constants/Layout";
 
 export default (CommentInput = ({ productId }) => {
   const { userId, username, email } = useContext(UserProfileContext);
@@ -51,8 +52,8 @@ export default (CommentInput = ({ productId }) => {
               email
             )
           }
-          text="Post"
-          textStyle={{ fontSize: 20, padding: 5 }}
+          text="POST"
+          textStyle={{ fontSize: height * 0.025, padding: height * 0.005 }}
         />
       </View>
     </View>
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     minHeight: 50,
     maxHeight: 100,
-    fontSize: 20,
+    fontSize: height * 0.03,
     fontFamily: "sans-light"
   },
   bottomPanelContainer: {

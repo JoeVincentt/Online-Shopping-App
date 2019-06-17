@@ -90,12 +90,24 @@ class App extends React.Component {
               <Container>
                 {Platform.OS === "ios" && <StatusBar barStyle="default" />}
 
-                <Header style={styles.headerStyle}>
+                {/* <Header style={styles.headerStyle}>
                   <HeaderCustom activeTab={activeTab} />
-                </Header>
+                </Header> */}
+
+                <Header
+                  style={{
+                    backgroundColor: colors.defaultBackgroundColor,
+                    height: height * 0.03,
+                    marginBottom: Platform.OS === "android" && 2
+                  }}
+                />
 
                 <Animated.View
-                  style={{ flex: 1, transform: [{ translateX: productsX }] }}
+                  style={{
+                    flex: 1,
+                    transform: [{ translateX: productsX }],
+                    backgroundColor: colors.defaultBackgroundColor
+                  }}
                 >
                   {this.renderContent()}
                 </Animated.View>

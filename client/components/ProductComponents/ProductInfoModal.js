@@ -84,7 +84,10 @@ export default (ProductInfoModal = ({
               <SimpleButton
                 onPress={() => setProductInfoModalOpen(false)}
                 text="CLOSE"
-                textStyle={{ padding: 2, fontSize: 20 }}
+                textStyle={{
+                  fontSize: height * 0.025,
+                  padding: height * 0.005
+                }}
                 style={{
                   borderColor: colors.danger,
                   justifyContent: "flex-end"
@@ -98,7 +101,7 @@ export default (ProductInfoModal = ({
                 source={{
                   uri: productInfo.imageUrl
                 }}
-                style={{ height: 250, width: null, flex: 1 }}
+                style={{ height: height * 0.4, width: null, flex: 1 }}
               />
             </CardItem>
 
@@ -111,13 +114,16 @@ export default (ProductInfoModal = ({
                 <Body>
                   <View style={styles.priceAndStockContainer}>
                     <TitleText
-                      style={{ fontSize: 45, color: colors.secondary }}
+                      style={{
+                        fontSize: height * 0.05,
+                        color: colors.secondary
+                      }}
                     >
                       {productInfo.price} $
                     </TitleText>
                     <ContentBoldText
                       style={{
-                        fontSize: 15,
+                        fontSize: height * 0.02,
                         color:
                           productInfo.availability === "In Stock"
                             ? colors.secondary
@@ -128,7 +134,7 @@ export default (ProductInfoModal = ({
                     </ContentBoldText>
                   </View>
 
-                  <TitleText style={{ fontSize: 25 }}>
+                  <TitleText style={{ fontSize: height * 0.03 }}>
                     {productInfo.name}
                   </TitleText>
                   <ContentLightText style={{}}>
@@ -188,7 +194,10 @@ export default (ProductInfoModal = ({
                         addItemToCart(productId, products);
                       }}
                       text="ADD TO CART"
-                      textStyle={{ fontSize: 20, padding: 5 }}
+                      textStyle={{
+                        fontSize: height * 0.025,
+                        padding: height * 0.01
+                      }}
                     />
                   </View>
                 </>

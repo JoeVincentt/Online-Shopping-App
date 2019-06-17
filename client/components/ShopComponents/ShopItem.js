@@ -10,6 +10,7 @@ import { UserProfileContext } from "../../context/UserProfileContext";
 import { TitleText, ContentLightText, ContentBoldText } from "../StyledText";
 import { truncateString } from "../../util/truncateString";
 import colors from "../../constants/Colors";
+import { height } from "../../constants/Layout";
 import { ShopContext } from "../../context/ShopContext";
 
 export default (ShopItem = ({
@@ -41,19 +42,21 @@ export default (ShopItem = ({
             source={{
               uri: imageUrl
             }}
-            style={{ height: 250, width: null, flex: 1 }}
+            style={{ height: height * 0.4, width: null, flex: 1 }}
           />
         </CardItem>
         <CardItem>
           <Left>
             <Body>
               <View style={styles.priceAndStockContainer}>
-                <TitleText style={{ fontSize: 45, color: colors.secondary }}>
+                <TitleText
+                  style={{ fontSize: height * 0.05, color: colors.secondary }}
+                >
                   {price} $
                 </TitleText>
                 <ContentBoldText
                   style={{
-                    fontSize: 15,
+                    fontSize: height * 0.02,
                     color:
                       availability === "In Stock"
                         ? colors.secondary
@@ -65,7 +68,7 @@ export default (ShopItem = ({
               </View>
 
               <TouchableOpacity onPress={() => setProductInfoModalOpen(true)}>
-                <TitleText style={{ fontSize: 25 }}>
+                <TitleText style={{ fontSize: height * 0.03 }}>
                   {truncateString(name, 75)}
                 </TitleText>
                 <ContentLightText style={{}}>
@@ -112,7 +115,10 @@ export default (ShopItem = ({
                     addItemToCart(id, products);
                   }}
                   text="ADD TO CART"
-                  textStyle={{ fontSize: 20, padding: 5 }}
+                  textStyle={{
+                    fontSize: height * 0.025,
+                    padding: height * 0.01
+                  }}
                 />
               </View>
             </>

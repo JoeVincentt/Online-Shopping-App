@@ -12,6 +12,7 @@ import { View, Text } from "react-native";
 
 import * as SecureStore from "expo-secure-store";
 
+import { height } from "../../constants/Layout";
 import colors from "../../constants/Colors";
 import SimpleButton from "../Buttons/SimpleButton";
 import { TitleText, ContentBoldText } from "../StyledText";
@@ -60,7 +61,7 @@ export default class Payments extends Component {
           <TitleText>Card In Use</TitleText>
         </View>
         <Item>
-          <Icon style={{ fontSize: 40 }} active name="card" />
+          <Icon style={{ fontSize: height * 0.05 }} active name="card" />
           <Input
             placeholder="ex: 4242515162627373"
             value={cardNumber}
@@ -79,7 +80,9 @@ export default class Payments extends Component {
           }}
         >
           <Item style={{ width: "40%" }}>
-            <ContentBoldText style={{ fontSize: 20 }}>EXP: </ContentBoldText>
+            <ContentBoldText style={{ fontSize: height * 0.025 }}>
+              EXP:{" "}
+            </ContentBoldText>
             <Input
               placeholder="0121"
               value={expirationDate}
@@ -92,7 +95,9 @@ export default class Payments extends Component {
             />
           </Item>
           <Item style={{ width: "40%" }}>
-            <ContentBoldText style={{ fontSize: 20 }}>CVV: </ContentBoldText>
+            <ContentBoldText style={{ fontSize: height * 0.025 }}>
+              CVV:{" "}
+            </ContentBoldText>
             <Input
               placeholder="444"
               value={cvv}
@@ -116,7 +121,7 @@ export default class Payments extends Component {
               onPress={() => this.setState({ rememberCard: !rememberCard })}
               style={{ marginRight: 20 }}
             />
-            <ContentBoldText style={{ fontSize: 20 }}>
+            <ContentBoldText style={{ fontSize: height * 0.025 }}>
               Remember Card
             </ContentBoldText>
           </Item>

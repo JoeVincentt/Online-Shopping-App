@@ -5,6 +5,7 @@ import { CardItem, Thumbnail, Left, Body, Right, Item } from "native-base";
 import SimpleButton from "../Buttons/SimpleButton";
 import { TitleText, ContentBoldText, ContentLightText } from "../StyledText";
 import colors from "../../constants/Colors";
+import { height } from "../../constants/Layout";
 import { truncateString } from "../../util/truncateString";
 
 export default props => {
@@ -24,21 +25,21 @@ export default props => {
             <Item style={{ justifyContent: "space-between" }}>
               <View style={{ width: "80%" }}>
                 <TouchableOpacity onPress={() => setProductInfoModalOpen(true)}>
-                  <TitleText style={{ fontSize: 25 }}>
+                  <TitleText style={{ fontSize: height * 0.03 }}>
                     {truncateString(props.productName, 75)}
                   </TitleText>
                 </TouchableOpacity>
               </View>
               <Item style={{ borderColor: "transparent" }}>
-                <ContentBoldText style={{ fontSize: 20 }}>
+                <ContentBoldText style={{ fontSize: height * 0.025 }}>
                   {props.productQuantity}
                 </ContentBoldText>
-                <ContentLightText style={{ fontSize: 20 }}>
+                <ContentLightText style={{ fontSize: height * 0.025 }}>
                   {" "}
                   x{" "}
                 </ContentLightText>
-                <ContentBoldText style={{ fontSize: 20 }}>
-                  {props.productPrice}$
+                <ContentBoldText style={{ fontSize: height * 0.025 }}>
+                  {props.productPrice} $
                 </ContentBoldText>
               </Item>
             </Item>
@@ -54,7 +55,7 @@ export default props => {
             onPress={() => props.deleteItem(props.id)}
             text="DELETE"
             style={{ borderColor: colors.danger }}
-            textStyle={{ fontSize: 16, padding: 5 }}
+            textStyle={{ fontSize: height * 0.02, padding: height * 0.005 }}
           />
         </Left>
         <Right />

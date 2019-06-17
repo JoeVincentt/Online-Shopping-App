@@ -30,7 +30,7 @@ export default (Shop = () => {
   return (
     <ScrollView style={{ flex: 1 }}>
       {/* Render Categories */}
-      {!loadingCategories ? (
+      {!loadingCategories && (
         <ScrollView
           showsHorizontalScrollIndicator={false}
           horizontal={true}
@@ -38,8 +38,6 @@ export default (Shop = () => {
         >
           {renderCategoriesBar()}
         </ScrollView>
-      ) : (
-        <View />
       )}
 
       {/* Render Products */}

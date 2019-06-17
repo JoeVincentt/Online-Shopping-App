@@ -4,6 +4,7 @@ import { View } from "react-native";
 
 import { TitleText, MarijuanaText } from "../../StyledText";
 import colors from "../../../constants/Colors";
+import { height } from "../../../constants/Layout";
 import SimpleButton from "../../Buttons/SimpleButton";
 import Order from "./Order";
 import OrderItems from "./OrderItems";
@@ -57,7 +58,7 @@ export default () => {
               order.orderStatus === "Canceled" ? (
                 <SimpleButton
                   onPress={() => reportOrder(order.id)}
-                  textStyle={{ fontSize: 20 }}
+                  textStyle={{ fontSize: height * 0.025 }}
                   style={{ borderColor: colors.warning }}
                   text="Report"
                 />
@@ -65,13 +66,14 @@ export default () => {
                 <SimpleButton
                   onPress={() => cancelOrder(order.id)}
                   text="Cancel"
-                  textStyle={{ fontSize: 20 }}
+                  textStyle={{ fontSize: height * 0.025 }}
                   style={{ borderColor: colors.danger }}
                 />
               )}
 
               <SimpleButton
                 onPress={() => reorderOrder(order.id)}
+                textStyle={{ fontSize: height * 0.025 }}
                 text="Reorder"
               />
             </Item>
@@ -84,7 +86,7 @@ export default () => {
   if (orders.length > 0) {
     return (
       <>
-        <View style={{ alignSelf: "flex-start", paddingTop: 20 }}>
+        <View style={{ alignSelf: "flex-start", paddingTop: height * 0.025 }}>
           <TitleText>Orders</TitleText>
         </View>
         <View>{renderOrders(orders)}</View>
@@ -97,7 +99,7 @@ export default () => {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          paddingTop: 20
+          paddingTop: height * 0.025
         }}
       >
         <MarijuanaText>Empty</MarijuanaText>

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { View, TouchableOpacity } from "react-native";
 
 import { TitleText } from "../StyledText";
+import { height } from "../../constants/Layout";
 import colors from "../../constants/Colors";
 import { ShopContext } from "../../context/ShopContext";
 
@@ -36,8 +37,12 @@ export default (Shop = ({
             alignItems: "center"
           }}
         >
-          <TitleText style={{ fontSize: 25 }}>{categoryName}</TitleText>
-          <TitleText style={{ fontSize: 20 }}>{categorySubName}</TitleText>
+          <TitleText style={{ fontSize: height * 0.03 }}>
+            {categoryName}
+          </TitleText>
+          <TitleText style={{ fontSize: height * 0.025 }}>
+            {categorySubName}
+          </TitleText>
         </View>
       </TouchableOpacity>
     </View>

@@ -6,6 +6,7 @@ import * as SecureStore from "expo-secure-store";
 import SimpleButton from "../Buttons/SimpleButton";
 import { MarijuanaText } from "../StyledText";
 import colors from "../../constants/Colors";
+import { height } from "../../constants/Layout";
 import CartItem from "./CartItem";
 import { CartContext } from "../../context/CartContext";
 import { UserProfileContext } from "../../context/UserProfileContext";
@@ -102,7 +103,7 @@ export default () => {
             style={{
               borderColor: colors.secondary
             }}
-            textStyle={{ fontSize: 30, padding: 5 }}
+            textStyle={{ fontSize: height * 0.03, padding: height * 0.01 }}
           />
           <View>{renderProducts()}</View>
           <SimpleButton
@@ -111,7 +112,7 @@ export default () => {
             style={{
               borderColor: colors.danger
             }}
-            textStyle={{ fontSize: 30, padding: 5 }}
+            textStyle={{ fontSize: height * 0.03, padding: height * 0.01 }}
           />
         </ScrollView>
       ) : (

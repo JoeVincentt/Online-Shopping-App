@@ -7,6 +7,7 @@ import SimpleButton from "../Buttons/SimpleButton";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { CartContext } from "../../context/CartContext";
 import { UIContext } from "../../context/UIContext";
+import { height } from "../../constants/Layout";
 
 export default (SignIn = props => {
   const { setSignIn } = useContext(UserProfileContext);
@@ -37,14 +38,14 @@ export default (SignIn = props => {
   return (
     <>
       <Form>
-        <View style={{ height: 30 }} />
+        <View style={{ height: height * 0.02 }} />
         <View style={styles.inputLabel}>
           <TitleText>Email</TitleText>
         </View>
         <Item stackedLabel>
           <Input style={styles.inputField} />
         </Item>
-        <View style={{ height: 30 }} />
+        <View style={{ height: height * 0.02 }} />
         <View style={styles.inputLabel}>
           <TitleText>Password</TitleText>
         </View>
@@ -60,11 +61,10 @@ export default (SignIn = props => {
 const styles = StyleSheet.create({
   inputLabel: {
     alignSelf: "flex-start",
-    marginLeft: 20
+    marginLeft: height * 0.015
   },
   inputField: {
     fontFamily: "sans-light",
-    fontSize: 20,
-    height: 30
+    fontSize: height * 0.03
   }
 });

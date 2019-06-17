@@ -5,6 +5,7 @@ import { TitleText, ContentItalicText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
 
 import colors from "../../constants/Colors";
+import { height } from "../../constants/Layout";
 
 export default (SignUp = ({ switchBetweenAuthModes }) => {
   const [email, setEmail] = useState("");
@@ -74,12 +75,11 @@ export default (SignUp = ({ switchBetweenAuthModes }) => {
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
       <Form>
-        <View style={{ height: 30 }} />
+        <View style={{ height: height * 0.02 }} />
         <View style={styles.inputLabel}>
           <TitleText style={{}}>Email</TitleText>
         </View>
         <Item
-          stackedLabel
           style={{
             borderBottomColor:
               emailValidation === true
@@ -100,7 +100,7 @@ export default (SignUp = ({ switchBetweenAuthModes }) => {
         </Item>
         <ContentItalicText
           style={{
-            marginLeft: 20,
+            marginLeft: height * 0.015,
             color:
               emailValidation === true
                 ? colors.secondary
@@ -115,7 +115,7 @@ export default (SignUp = ({ switchBetweenAuthModes }) => {
             ? "Email Invalid"
             : ""}{" "}
         </ContentItalicText>
-        <View style={{ height: 30 }} />
+        <View style={{ height: height * 0.02 }} />
         <View style={styles.inputLabel}>
           <TitleText>Password</TitleText>
         </View>
@@ -143,7 +143,7 @@ export default (SignUp = ({ switchBetweenAuthModes }) => {
         </Item>
         <ContentItalicText
           style={{
-            marginLeft: 20,
+            marginLeft: height * 0.015,
             color:
               passwordValidation === "Weak"
                 ? colors.danger
@@ -156,7 +156,7 @@ export default (SignUp = ({ switchBetweenAuthModes }) => {
         >
           {passwordValidation && `${passwordValidation} Password`}{" "}
         </ContentItalicText>
-        <View style={{ height: 30 }} />
+        <View style={{ height: height * 0.02 }} />
         <View style={styles.inputLabel}>
           <TitleText>Repeat Password</TitleText>
         </View>
@@ -178,11 +178,10 @@ export default (SignUp = ({ switchBetweenAuthModes }) => {
 const styles = StyleSheet.create({
   inputLabel: {
     alignSelf: "flex-start",
-    marginLeft: 20
+    marginLeft: height * 0.015
   },
   inputField: {
     fontFamily: "sans-light",
-    fontSize: 20,
-    height: 30
+    fontSize: height * 0.03
   }
 });

@@ -90,7 +90,10 @@ export default (ProductInfoModal = ({
               <SimpleButton
                 onPress={() => setProductCommentsModalOpen(false)}
                 text="CLOSE"
-                textStyle={{ padding: 2, fontSize: 20 }}
+                textStyle={{
+                  fontSize: height * 0.025,
+                  padding: height * 0.005
+                }}
                 style={{
                   borderColor: colors.danger,
                   justifyContent: "flex-end"
@@ -121,10 +124,10 @@ export default (ProductInfoModal = ({
                     <Thumbnail source={{ uri: comment.avatar }} />
                   </Left>
                   <Body style={{ borderColor: "transparent" }}>
-                    <ContentBoldText style={{ fontSize: 20 }}>
+                    <ContentBoldText style={{ fontSize: height * 0.025 }}>
                       {comment.name}
                     </ContentBoldText>
-                    <ContentLightText style={{ fontSize: 20 }}>
+                    <ContentLightText style={{ fontSize: height * 0.025 }}>
                       {comment.text}
                     </ContentLightText>
                   </Body>
@@ -140,8 +143,7 @@ export default (ProductInfoModal = ({
 
 const styles = StyleSheet.create({
   listContainer: {
-    paddingVertical: 20,
-    //     borderTopWidth: 0.5,
+    paddingVertical: height * 0.025,
     borderBottomWidth: 0.5,
     borderBottomColor: "#ccc",
     borderTopColor: "#ccc"
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
   commentContainer: {
     justifyContent: "space-between",
     flexDirection: "row",
-    paddingHorizontal: 20,
+    paddingHorizontal: height * 0.025,
     paddingTop: 5
   }
 });
