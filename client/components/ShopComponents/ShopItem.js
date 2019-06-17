@@ -10,6 +10,7 @@ import { UserProfileContext } from "../../context/UserProfileContext";
 import { TitleText, ContentLightText, ContentBoldText } from "../StyledText";
 import { truncateString } from "../../util/truncateString";
 import colors from "../../constants/Colors";
+import { ShopContext } from "../../context/ShopContext";
 
 export default (ShopItem = ({
   id,
@@ -21,8 +22,11 @@ export default (ShopItem = ({
   comments,
   likes
 }) => {
+  const { likeProduct, products } = useContext(ShopContext);
   const { addItemToCart } = useContext(CartContext);
-  const { addItemToFavorite, signedIn } = useContext(UserProfileContext);
+  const { addItemToFavorite, signedIn, userId } = useContext(
+    UserProfileContext
+  );
 
   const [productInfoModalOpen, setProductInfoModalOpen] = useState(false);
   const [productCommentsModalOpen, setProductCommentsModalOpen] = useState(
@@ -73,7 +77,7 @@ export default (ShopItem = ({
         </CardItem>
 
         <View style={styles.buttonPanel}>
-          <TouchableOpacity onPress={() => console.log("product liked")}>
+          <TouchableOpacity onPress={() => signedIn && likeProduct(id, userId)}>
             <View style={styles.buttonContainer}>
               <Icon
                 name="thumbs-up"
@@ -93,7 +97,7 @@ export default (ShopItem = ({
           </TouchableOpacity>
           {signedIn && (
             <>
-              <TouchableOpacity onPress={() => addItemToFavorite(id)}>
+              <TouchableOpacity onPress={() => addItemToFavorite(id, products)}>
                 <View style={styles.buttonContainer}>
                   <Icon
                     name="heart"
@@ -105,7 +109,7 @@ export default (ShopItem = ({
               <View>
                 <SimpleButton
                   onPress={() => {
-                    addItemToCart(id);
+                    addItemToCart(id, products);
                   }}
                   text="ADD TO CART"
                   textStyle={{ fontSize: 20, padding: 5 }}

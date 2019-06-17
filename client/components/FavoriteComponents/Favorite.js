@@ -36,11 +36,10 @@ export default () => {
         <FavoriteItem
           key={product.id}
           id={product.id}
-          productImage={product.productImage}
-          productName={product.productName}
-          productDescription={product.productDescription}
-          productQuantity={product.productQuantity}
-          productPrice={product.productPrice}
+          productImage={product.imageUrl}
+          productName={product.name}
+          productDescription={product.description}
+          productPrice={product.price}
           deleteItem={deleteItem}
           addItemToCart={addItemToCart}
         />

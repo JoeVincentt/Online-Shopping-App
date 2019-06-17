@@ -57,7 +57,7 @@ export default (Shop = () => {
               description={item.description}
               imageUrl={item.imageUrl}
               likes={item.likes.length}
-              comments={item.likes.length}
+              comments={item.comments.length}
             />
           )}
           keyExtractor={item => item.id}

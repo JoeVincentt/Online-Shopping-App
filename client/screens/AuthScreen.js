@@ -21,7 +21,7 @@ export default class AuthScreen extends Component {
       return <SignIn logIn={this.props.logIn} />;
     }
     if (this.state.signup) {
-      return <SignUp />;
+      return <SignUp switchBetweenAuthModes={this.switchBetweenAuthModes} />;
     }
   };
 

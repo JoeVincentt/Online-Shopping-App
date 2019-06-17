@@ -16,14 +16,14 @@ export default (SignIn = props => {
 
   const signIn = () => {
     //fetch and setup user
-    console.log("singIn");
     setTimeout(() => {
       setSignIn(
-        "Van",
-        "Wan Gog",
-        "E@e.com",
-        "212 St ave",
-        "9431234122",
+        "2",
+        "Username",
+        "Full Name",
+        "email@email.com",
+        "Home Address",
+        "Phone Number",
         [],
         []
       );

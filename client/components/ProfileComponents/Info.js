@@ -98,7 +98,6 @@ export default props => {
       >
         <SimpleButton
           style={{ borderColor: colors.danger }}
-          textStyle={{ fontSize: 30, padding: 5 }}
           onPress={logOut}
           text="Sing Out"
         />

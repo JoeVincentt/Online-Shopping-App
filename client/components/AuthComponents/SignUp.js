@@ -6,7 +6,7 @@ import SimpleButton from "../Buttons/SimpleButton";
 
 import colors from "../../constants/Colors";
 
-export default (SignUp = () => {
+export default (SignUp = ({ switchBetweenAuthModes }) => {
   const [email, setEmail] = useState("");
   const [emailValidation, setEmailValidation] = useState("");
   const [password, setPassword] = useState("");
@@ -45,11 +45,12 @@ export default (SignUp = () => {
   const signUp = () => {
     if (
       emailValidation === true &&
-      (passwordValidation === "medium" || passwordValidation === "strong") &&
+      (passwordValidation === "Medium" || passwordValidation === "Strong") &&
       password.trim().length >= 6 &&
       password.trim() === passwordConfirmation.trim()
     ) {
       //Call to server to validate password information
+      switchBetweenAuthModes();
       console.log("call to the server");
     } else {
       Alert.alert(
@@ -59,7 +60,6 @@ export default (SignUp = () => {
           {
             text: "Got it!",
             onPress: () => {
-              setEmail("");
               setPassword("");
               setPasswordConfirmation("");
             },
@@ -68,7 +68,6 @@ export default (SignUp = () => {
         ],
         { cancelable: false }
       );
-      console.log("doesn't meet criteria");
     }
   };
 
@@ -94,8 +93,8 @@ export default (SignUp = () => {
             style={styles.inputField}
             value={email}
             onChangeText={email => {
-              analyzeEmail(email);
               setEmail(email);
+              analyzeEmail(email);
             }}
           />
         </Item>

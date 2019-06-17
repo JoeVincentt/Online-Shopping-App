@@ -6,10 +6,11 @@ import { TitleText, ContentBoldText, ContentLightText } from "../StyledText";
 import colors from "../../constants/Colors";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { CartContext } from "../../context/CartContext";
+import { ShopContext } from "../../context/ShopContext";
 
 export default props => {
   const {} = useContext(UserProfileContext);
-  const {} = useContext(CartContext);
+  const { products } = useContext(ShopContext);
 
   const [productInfoModalOpen, setProductInfoModalOpen] = useState(false);
 
@@ -33,18 +34,6 @@ export default props => {
                   </TitleText>
                 </TouchableOpacity>
               </View>
-              <Item style={{ borderColor: "transparent" }}>
-                <ContentBoldText style={{ fontSize: 20 }}>
-                  {props.productQuantity}
-                </ContentBoldText>
-                <ContentLightText style={{ fontSize: 20 }}>
-                  {" "}
-                  x{" "}
-                </ContentLightText>
-                <ContentBoldText style={{ fontSize: 20 }}>
-                  {props.productPrice}$
-                </ContentBoldText>
-              </Item>
             </Item>
             <ContentLightText>{props.productDescription}</ContentLightText>
           </Body>
@@ -62,7 +51,7 @@ export default props => {
         <Right>
           <SimpleButton
             onPress={() => {
-              props.addItemToCart(props.id);
+              props.addItemToCart(props.id, products);
               props.deleteItem(props.id);
             }}
             text="ADD TO CART"

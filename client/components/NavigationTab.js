@@ -32,6 +32,7 @@ const Tab = props => {
         style={props.active ? { fontSize: 50, color: colors.secondary } : {}}
         name={props.iconName}
       />
+
       {props.active ? null : (
         <ContentLightText>{props.tabText}</ContentLightText>
       )}

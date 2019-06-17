@@ -89,6 +89,7 @@ class App extends React.Component {
             ) : (
               <Container>
                 {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+
                 <Header style={styles.headerStyle}>
                   <HeaderCustom activeTab={activeTab} />
                 </Header>

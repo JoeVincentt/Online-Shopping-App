@@ -11,7 +11,7 @@ import { CartContext } from "../../context/CartContext";
 import { UserProfileContext } from "../../context/UserProfileContext";
 
 export default () => {
-  const { cartItems, updateItems, emptyCartAfterOrder } = useContext(
+  const { cartItems, updateCartItems, emptyCartAfterOrder } = useContext(
     CartContext
   );
   const { username, fullName, address, phoneNumber } = useContext(
@@ -38,9 +38,9 @@ export default () => {
     }
     let totalPrice = 0;
     for (let index = 0; index < cartItems.length; index++) {
-      totalPrice +=
-        cartItems[index].productPrice * cartItems[index].productQuantity;
+      totalPrice += cartItems[index].price * cartItems[index].quantity;
     }
+
     Alert.alert(
       `Total: ${totalPrice} $ \n\n Please Confirm Your Order: \n\n Username: ${username} \n Full Name: ${fullName} \n Address: ${address} \n Phone Number: ${phoneNumber} \n\n Card Number: ${
         savedCard.cardNumber
@@ -71,7 +71,7 @@ export default () => {
       product => product.id !== productId
     );
     //make call to api to update cartItems
-    updateItems(updatedCartItems);
+    updateCartItems(updatedCartItems);
   };
 
   renderProducts = () => {
@@ -80,11 +80,11 @@ export default () => {
         <CartItem
           key={product.id}
           id={product.id}
-          productImage={product.productImage}
-          productName={product.productName}
-          productDescription={product.productDescription}
-          productQuantity={product.productQuantity}
-          productPrice={product.productPrice}
+          productImage={product.imageUrl}
+          productName={product.name}
+          productDescription={product.description}
+          productQuantity={product.quantity}
+          productPrice={product.price}
           deleteItem={deleteItem}
         />
       </Card>

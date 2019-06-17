@@ -16,33 +16,35 @@ import { UserProfileContext } from "../../context/UserProfileContext";
 import { TitleText, ContentLightText, ContentBoldText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
 
+import { ShopContext } from "../../context/ShopContext";
+
 export default (ProductInfoModal = ({
   openProductInfoModal,
   setProductInfoModalOpen,
   productId
 }) => {
+  //Context ref
   const { addItemToCart } = useContext(CartContext);
-  const { addItemToFavorite, signedIn } = useContext(UserProfileContext);
+  const { addItemToFavorite, signedIn, userId } = useContext(
+    UserProfileContext
+  );
+  const { products, likeProduct } = useContext(ShopContext);
+
+  //State
   const [productInfo, setProductInfo] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     // console.log(productId);
+
     setTimeout(() => {
-      setProductInfo({
-        id: "1",
-        name:
-          "All-New Echo Dot Kids Edition, an Echo designed for kids, Rainbow",
-        price: 16,
-        availability: "Out of Stock",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble.",
-        imageUrl:
-          "https://images-na.ssl-images-amazon.com/images/I/71TzCLRzYAL._SL1500_.jpg",
-        likes: [],
-        comments: []
+      products.forEach(prod => {
+        if (prod.id === productId) {
+          setProductInfo(prod);
+        }
       });
+
       setLoading(false);
-    }, 3000);
+    }, 500);
     return () => {
       // Clean up the subscription
     };
@@ -137,7 +139,9 @@ export default (ProductInfoModal = ({
 
             {/* Button Panel */}
             <View style={styles.buttonPanel}>
-              <TouchableOpacity onPress={() => console.log("product liked")}>
+              <TouchableOpacity
+                onPress={() => signedIn && likeProduct(productId, userId)}
+              >
                 <View style={styles.buttonContainer}>
                   <Icon
                     name="thumbs-up"
@@ -152,7 +156,7 @@ export default (ProductInfoModal = ({
               {signedIn && (
                 <>
                   <TouchableOpacity
-                    onPress={() => addItemToFavorite(productId)}
+                    onPress={() => addItemToFavorite(productId, products)}
                   >
                     <View style={styles.buttonContainer}>
                       <Icon
@@ -164,7 +168,7 @@ export default (ProductInfoModal = ({
                   <View>
                     <SimpleButton
                       onPress={() => {
-                        addItemToCart(productId);
+                        addItemToCart(productId, products);
                       }}
                       text="ADD TO CART"
                       textStyle={{ fontSize: 20, padding: 5 }}

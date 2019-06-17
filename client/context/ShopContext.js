@@ -1,5 +1,8 @@
 import React from "react";
 
+import categoriesDB from "../db/categories";
+import cbdCatDB from "../db/productByCategory/cbd";
+
 //Create context
 export const ShopContext = React.createContext();
 export const ShopContextConsumer = ShopContext.Consumer;
@@ -8,47 +11,38 @@ export class ShopContextProvider extends React.Component {
   state = {
     loading: true,
     loadingCategories: true,
-    products: [
-      {
-        id: "1",
-        name:
-          "All-New Echo Dot Kids Edition, an Echo designed for kids, Rainbow",
-        price: 16,
-        availability: "Out of Stock",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        imageUrl:
-          "https://images-na.ssl-images-amazon.com/images/I/71TzCLRzYAL._SL1500_.jpg",
-        likes: [],
-        comments: []
-      },
-      {
-        id: "2",
-        name:
-          "Ring Alarm 5 Piece Kit – Smart Home Security System – Works with Alexa",
-        price: 16,
-        availability: "In Stock",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        imageUrl:
-          "https://cdn.pixabay.com/photo/2013/04/07/21/30/croissant-101636_1280.jpg",
-        likes: [],
-        comments: []
-      }
-    ],
+    products: [],
     activeCategory: 0,
     activeCategoryName: "CBD",
     categories: [],
-    setActiveCategory: async index => {
-      //Set Active Category
-      await this.setState({ activeCategory: index });
+    setActiveCategory: index => this.setActiveCategory(index),
+    likeProduct: (prodId, userId) => this.likeProduct(prodId, userId)
+  };
 
-      //Get  Active Category Name
-      const { categories, activeCategory } = this.state;
-      const activeCategoryName = await categories[activeCategory].categoryName;
-      this.setState({ activeCategoryName });
-      this.fetchProducts();
-    }
+  likeProduct = async (prodId, userId) => {
+    const { products } = this.state;
+
+    await products.map(prod => {
+      if (prod.id === prodId) {
+        if (prod.likes.indexOf(userId) !== -1) {
+          //tell user he already liked that product
+          return;
+        }
+        prod.likes.push(userId);
+      }
+    });
+
+    this.setState({ products });
+  };
+
+  setActiveCategory = async index => {
+    //Set Active Category
+    await this.setState({ activeCategory: index });
+    //Get  Active Category Name
+    const { categories, activeCategory } = this.state;
+    const activeCategoryName = await categories[activeCategory].categoryName;
+    this.setState({ activeCategoryName });
+    this.fetchProducts();
   };
 
   fetchCategories = () => {
@@ -56,28 +50,7 @@ export class ShopContextProvider extends React.Component {
     setTimeout(
       () =>
         this.setState({
-          categories: [
-            {
-              categoryName: "CBD",
-              categorySubName: "OIL"
-            },
-            {
-              categoryName: "CARTS",
-              categorySubName: ""
-            },
-            {
-              categoryName: "PENS",
-              categorySubName: ""
-            },
-            {
-              categoryName: "VAPORS",
-              categorySubName: "OIL"
-            },
-            {
-              categoryName: "ACCESSORIES",
-              categorySubName: "ect."
-            }
-          ],
+          categories: categoriesDB,
           loadingCategories: false
         }),
       1000
@@ -91,12 +64,13 @@ export class ShopContextProvider extends React.Component {
       setTimeout(
         () =>
           this.setState({
+            products: cbdCatDB,
             loading: false
           }),
         1000
       );
     }
-    if (activeCategoryName === "CARTS") {
+    if (activeCategoryName === "GUMMIES") {
       setTimeout(
         () =>
           this.setState({

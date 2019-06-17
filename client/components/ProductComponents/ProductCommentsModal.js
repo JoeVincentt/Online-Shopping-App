@@ -27,6 +27,7 @@ import { CartContext } from "../../context/CartContext";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { TitleText, ContentLightText, ContentBoldText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
+import { ShopContext } from "../../context/ShopContext";
 
 export default (ProductInfoModal = ({
   openProductCommentsModal,
@@ -35,40 +36,21 @@ export default (ProductInfoModal = ({
 }) => {
   const {} = useContext(CartContext);
   const {} = useContext(UserProfileContext);
+  const { products } = useContext(ShopContext);
+
   const [productComments, setProductComments] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     // console.log(productId);
     setTimeout(() => {
-      setProductComments([
-        {
-          id: 1,
-          name: "Joe Johnes",
-          text: "Great products",
-          rating: 5,
-          avatar: "https://api.adorable.io/avatars/285/joe.james@gmail.com.png",
-          timeStamp: Date.now()
-        },
-        {
-          id: 2,
-          name: "Terry Johnes",
-          text:
-            "Shit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit productShit product",
-          rating: 1,
-          avatar: "https://api.adorable.io/avatars/285/joe.es@gmail.com.png",
-          timeStamp: Date.now()
-        },
-        {
-          id: 3,
-          name: "Some One Else",
-          text: "Okay Quality",
-          rating: 3,
-          avatar: "https://api.adorable.io/avatars/285/joe.jam@mail.com.png",
-          timeStamp: Date.now()
+      products.forEach(prod => {
+        if (prod.id === productId) {
+          setProductComments(prod.comments);
         }
-      ]);
+      });
       setLoading(false);
     }, 500);
+
     return () => {
       // Clean up the subscription
     };
@@ -97,6 +79,8 @@ export default (ProductInfoModal = ({
         <Spinner />
       ) : (
         <Card>
+          {/* Add form to post comment */}
+
           {/* Image */}
           <ScrollView>
             {/* Closing button */}
