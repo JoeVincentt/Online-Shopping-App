@@ -31,7 +31,7 @@ export default (Shop = ({
       <TouchableOpacity onPress={() => setActiveCategory(index)}>
         <View
           style={{
-            padding: 25,
+            padding: 10,
             justifyContent: "center",
             alignItems: "center"
           }}

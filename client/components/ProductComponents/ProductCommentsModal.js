@@ -5,7 +5,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Text
+  Text,
+  TextInput
 } from "react-native";
 import StarRating from "react-native-star-rating";
 
@@ -29,6 +30,7 @@ import { TitleText, ContentLightText, ContentBoldText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
 import { ShopContext } from "../../context/ShopContext";
 import { formatDate } from "../../util/formatDate";
+import CommentInput from "./CommentInput";
 
 export default (ProductInfoModal = ({
   openProductCommentsModal,
@@ -36,11 +38,12 @@ export default (ProductInfoModal = ({
   productId
 }) => {
   const {} = useContext(CartContext);
-  const {} = useContext(UserProfileContext);
+  const { signedIn } = useContext(UserProfileContext);
   const { products } = useContext(ShopContext);
 
   const [productComments, setProductComments] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     // console.log(productId);
     setTimeout(() => {
@@ -94,6 +97,11 @@ export default (ProductInfoModal = ({
                 }}
               />
             </View>
+
+            {/* Comment Input */}
+            {signedIn && <CommentInput productId={productId} />}
+            {/* Comment Input */}
+
             {/* ClosingButton */}
             {productComments.map((comment, i) => (
               <List key={comment.id} style={styles.listContainer}>
@@ -132,7 +140,7 @@ export default (ProductInfoModal = ({
 
 const styles = StyleSheet.create({
   listContainer: {
-    marginVertical: 10,
+    paddingVertical: 20,
     //     borderTopWidth: 0.5,
     borderBottomWidth: 0.5,
     borderBottomColor: "#ccc",

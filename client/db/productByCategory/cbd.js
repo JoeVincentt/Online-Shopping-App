@@ -18,6 +18,7 @@ export default (CBD = [
     comments: [
       {
         id: 1,
+        userId: 2,
         name: "Joe Johnes",
         text: "Great products",
         rating: 5,

@@ -102,7 +102,6 @@ class App extends React.Component {
 
                 <Footer
                   style={{
-                    height: height * 0.1,
                     backgroundColor: colors.defaultBackgroundColor
                   }}
                 >
@@ -160,10 +159,7 @@ export default App;
 const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: colors.defaultBackgroundColor,
-    paddingTop: Platform.OS === "ios" ? 10 : getStatusBarHeight(),
-    height:
-      Platform.OS === "ios"
-        ? 24 + getStatusBarHeight()
-        : 54 + getStatusBarHeight()
+    paddingTop: getStatusBarHeight(),
+    height: 54 + getStatusBarHeight()
   }
 });

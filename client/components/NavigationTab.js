@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Text, StyleSheet } from "react-native";
 import { Button, Icon, Badge } from "native-base";
 import { ContentLightText } from "../components/StyledText";
+import { height } from "../constants/Layout";
 import colors from "../constants/Colors";
 
 const Tab = props => {
@@ -10,7 +11,10 @@ const Tab = props => {
       onPress={() => {
         props.onPress(props.navigateTo);
       }}
-      style={{ paddingBottom: props.cartLength && 15 }}
+      style={{
+        marginTop: height * 0.03,
+        paddingBottom: (props.cartLength && height * 0.025) || height * 0.014
+      }}
       active={props.activeTab}
       badge
       vertical

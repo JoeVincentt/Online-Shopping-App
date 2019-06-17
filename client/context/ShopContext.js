@@ -16,12 +16,33 @@ export class ShopContextProvider extends React.Component {
     activeCategoryName: "CBD",
     categories: [],
     setActiveCategory: index => this.setActiveCategory(index),
-    likeProduct: (prodId, userId) => this.likeProduct(prodId, userId)
+    likeProduct: (prodId, userId) => this.likeProduct(prodId, userId),
+    addComment: (prodId, userId, username, commentText, rating, email) =>
+      this.addComment(prodId, userId, username, commentText, rating, email)
+  };
+
+  addComment = async (prodId, userId, username, commentText, rating, email) => {
+    const { products } = this.state;
+
+    const newComment = {
+      id: Math.random(),
+      userId: userId,
+      name: username,
+      text: commentText,
+      rating: rating,
+      avatar: `https://api.adorable.io/avatars/285/${email}.png`,
+      timeStamp: Date.now()
+    };
+
+    await products.map(prod => {
+      if (prod.id === prodId) prod.comments.unshift(newComment);
+    });
+
+    this.setState({ products });
   };
 
   likeProduct = async (prodId, userId) => {
     const { products } = this.state;
-
     await products.map(prod => {
       if (prod.id === prodId) {
         if (prod.likes.indexOf(userId) !== -1) {
@@ -31,7 +52,6 @@ export class ShopContextProvider extends React.Component {
         prod.likes.push(userId);
       }
     });
-
     this.setState({ products });
   };
 
