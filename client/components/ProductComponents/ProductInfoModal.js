@@ -15,6 +15,7 @@ import { CartContext } from "../../context/CartContext";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { TitleText, ContentLightText, ContentBoldText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
+import ProductCommentsModal from "./ProductCommentsModal";
 
 import { ShopContext } from "../../context/ShopContext";
 
@@ -31,8 +32,13 @@ export default (ProductInfoModal = ({
   const { products, likeProduct } = useContext(ShopContext);
 
   //State
+  const [productCommentsModalOpen, setProductCommentsModalOpen] = useState(
+    false
+  );
   const [productInfo, setProductInfo] = useState({});
   const [loading, setLoading] = useState(true);
+
+  //Effect
   useEffect(() => {
     // console.log(productId);
 
@@ -53,9 +59,6 @@ export default (ProductInfoModal = ({
   return (
     <Modal
       isVisible={openProductInfoModal}
-      // onSwipeComplete={() => setProductInfoModalOpen(false)}
-      // swipeDirection={["left", "right"]}
-      // backdropColor="#B4B3DB"
       useNativeDriver={true}
       backdropOpacity={0.8}
       animationIn="slideInLeft"
@@ -152,6 +155,19 @@ export default (ProductInfoModal = ({
                   </ContentBoldText>
                 </View>
               </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setProductCommentsModalOpen(true)}
+              >
+                <View style={styles.buttonContainer}>
+                  <Icon
+                    name="people"
+                    style={{ margin: 10, color: colors.warning }}
+                  />
+                  <ContentBoldText>
+                    {productInfo.comments.length.toString()}
+                  </ContentBoldText>
+                </View>
+              </TouchableOpacity>
 
               {signedIn && (
                 <>
@@ -165,6 +181,7 @@ export default (ProductInfoModal = ({
                       />
                     </View>
                   </TouchableOpacity>
+
                   <View>
                     <SimpleButton
                       onPress={() => {
@@ -179,6 +196,13 @@ export default (ProductInfoModal = ({
             </View>
             {/* Button Panel */}
           </ScrollView>
+          {productCommentsModalOpen && (
+            <ProductCommentsModal
+              openProductCommentsModal={productCommentsModalOpen}
+              setProductCommentsModalOpen={setProductCommentsModalOpen}
+              productId={productId}
+            />
+          )}
         </Card>
       )}
     </Modal>

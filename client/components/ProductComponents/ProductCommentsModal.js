@@ -28,6 +28,7 @@ import { UserProfileContext } from "../../context/UserProfileContext";
 import { TitleText, ContentLightText, ContentBoldText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
 import { ShopContext } from "../../context/ShopContext";
+import { formatDate } from "../../util/formatDate";
 
 export default (ProductInfoModal = ({
   openProductCommentsModal,
@@ -55,13 +56,6 @@ export default (ProductInfoModal = ({
       // Clean up the subscription
     };
   }, []);
-
-  const formatDate = date => {
-    const newDate = new Date(date).toUTCString();
-    const localDate = new Date(newDate).toLocaleDateString();
-
-    return `${localDate}`;
-  };
 
   return (
     <Modal

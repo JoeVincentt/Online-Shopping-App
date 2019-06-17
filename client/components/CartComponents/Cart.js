@@ -14,7 +14,7 @@ export default () => {
   const { cartItems, updateCartItems, emptyCartAfterOrder } = useContext(
     CartContext
   );
-  const { username, fullName, address, phoneNumber } = useContext(
+  const { username, fullName, address, phoneNumber, createOrder } = useContext(
     UserProfileContext
   );
 
@@ -53,7 +53,7 @@ export default () => {
         },
         {
           text: "Confirm",
-          onPress: () => confirmOrder(),
+          onPress: () => confirmOrder(totalPrice),
           style: "cancel"
         }
       ],
@@ -61,8 +61,9 @@ export default () => {
     );
   };
 
-  const confirmOrder = () => {
+  const confirmOrder = totalPrice => {
     //update Orders
+    createOrder(cartItems, totalPrice);
     emptyCartAfterOrder();
   };
 

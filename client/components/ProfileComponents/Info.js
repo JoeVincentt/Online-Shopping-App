@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Item, Input, Icon } from "native-base";
-import { View } from "react-native";
+import { View, KeyboardAvoidingView } from "react-native";
 
 import { TitleText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
@@ -33,7 +33,7 @@ export default props => {
   };
 
   return (
-    <>
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
       <View style={{ alignSelf: "flex-start", paddingTop: 20 }}>
         <TitleText>Account</TitleText>
       </View>
@@ -107,6 +107,6 @@ export default props => {
           text="Save"
         />
       </Item>
-    </>
+    </KeyboardAvoidingView>
   );
 };

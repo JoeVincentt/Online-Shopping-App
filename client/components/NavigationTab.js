@@ -10,14 +10,7 @@ const Tab = props => {
       onPress={() => {
         props.onPress(props.navigateTo);
       }}
-      style={
-        props.active
-          ? {
-              height: "100%",
-              borderRadius: 0
-            }
-          : { paddingBottom: props.cartLength ? 15 : 0 }
-      }
+      style={{ paddingBottom: props.cartLength && 15 }}
       active={props.activeTab}
       badge
       vertical
@@ -29,13 +22,13 @@ const Tab = props => {
       )}
 
       <Icon
-        style={props.active ? { fontSize: 50, color: colors.secondary } : {}}
+        style={props.active ? { color: colors.secondary } : {}}
         name={props.iconName}
       />
 
-      {props.active ? null : (
-        <ContentLightText>{props.tabText}</ContentLightText>
-      )}
+      <ContentLightText style={props.active ? { color: colors.secondary } : {}}>
+        {props.tabText}
+      </ContentLightText>
     </Button>
   );
 };

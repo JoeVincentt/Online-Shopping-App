@@ -61,7 +61,36 @@ export class UserProfileContextProvider extends React.Component {
       this.setState({ favoriteProducts: updatedFavoriteProducts }),
 
     addItemToFavorite: async (productId, products) =>
-      this.addItemToFavorite(productId, products)
+      this.addItemToFavorite(productId, products),
+
+    createOrder: async (cartItems, totalPrice) =>
+      this.createOrder(cartItems, totalPrice)
+  };
+
+  createOrder = async (cartItems, totalPrice) => {
+    let newOrder = {
+      id: Math.random(),
+      price: totalPrice,
+      orderedDate: Date.now(),
+      orderStatus: "Posted",
+      customerEmail: this.state.email,
+      customerAddress: this.state.address,
+      products: []
+    };
+
+    await cartItems.forEach(prod => {
+      let newProdInOrder = {
+        id: prod.id,
+        name: prod.name,
+        quantity: prod.quantity,
+        price: prod.price
+      };
+      newOrder.products.unshift(newProdInOrder);
+    });
+
+    let orders = this.state.orders;
+    await orders.unshift(newOrder);
+    this.setState({ orders });
   };
 
   addItemToFavorite = async (productId, products) => {

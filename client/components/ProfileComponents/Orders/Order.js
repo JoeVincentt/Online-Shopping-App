@@ -6,6 +6,7 @@ import {
   ContentItalicText,
   ContentLightText
 } from "../../StyledText";
+import { formatDate } from "../../../util/formatDate";
 import colors from "../../../constants/Colors";
 
 export default props => (
@@ -24,7 +25,9 @@ export default props => (
         <ContentBoldText>Order ID: </ContentBoldText>
         <ContentLightText>{props.orderId}</ContentLightText>
       </Item>
-      <ContentItalicText>Date: {props.orderedDate} </ContentItalicText>
+      <ContentItalicText>
+        Date: {formatDate(props.orderedDate)}{" "}
+      </ContentItalicText>
     </Item>
     <Item
       style={{

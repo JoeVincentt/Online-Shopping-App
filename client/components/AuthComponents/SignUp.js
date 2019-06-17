@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, KeyboardAvoidingView } from "react-native";
 import { Form, Item, Input } from "native-base";
 import { TitleText, ContentItalicText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
@@ -72,7 +72,7 @@ export default (SignUp = ({ switchBetweenAuthModes }) => {
   };
 
   return (
-    <>
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
       <Form>
         <View style={{ height: 30 }} />
         <View style={styles.inputLabel}>
@@ -171,7 +171,7 @@ export default (SignUp = ({ switchBetweenAuthModes }) => {
         </Item>
       </Form>
       <SimpleButton onPress={signUp} text="Sign Up" />
-    </>
+    </KeyboardAvoidingView>
   );
 });
 

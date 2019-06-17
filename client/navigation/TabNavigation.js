@@ -14,8 +14,7 @@ export default (TabNavigation = props => {
       style={{
         borderTopWidth: 0.5,
         borderTopColor: colors.tabNavBorderTop,
-        backgroundColor: colors.defaultBackgroundColor,
-        marginBottom: 20
+        backgroundColor: colors.defaultBackgroundColor
       }}
     >
       {props.loggedIn ? (

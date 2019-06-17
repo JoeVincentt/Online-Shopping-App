@@ -102,7 +102,7 @@ class App extends React.Component {
 
                 <Footer
                   style={{
-                    height: Platform.OS === "android" && height * 0.12,
+                    height: height * 0.1,
                     backgroundColor: colors.defaultBackgroundColor
                   }}
                 >

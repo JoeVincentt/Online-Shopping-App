@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { CardItem, Thumbnail, Left, Body, Right, Item } from "native-base";
+
 import SimpleButton from "../Buttons/SimpleButton";
 import { TitleText, ContentBoldText, ContentLightText } from "../StyledText";
 import colors from "../../constants/Colors";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { CartContext } from "../../context/CartContext";
 import { ShopContext } from "../../context/ShopContext";
+import { truncateString } from "../../util/truncateString";
 
 export default props => {
   const {} = useContext(UserProfileContext);
@@ -30,12 +32,14 @@ export default props => {
               <View style={{ width: "80%" }}>
                 <TouchableOpacity onPress={() => setProductInfoModalOpen(true)}>
                   <TitleText style={{ fontSize: 25 }}>
-                    {props.productName}
+                    {truncateString(props.productName, 75)}
                   </TitleText>
                 </TouchableOpacity>
               </View>
             </Item>
-            <ContentLightText>{props.productDescription}</ContentLightText>
+            <ContentLightText>
+              {truncateString(props.productDescription, 300)}
+            </ContentLightText>
           </Body>
         </Left>
       </CardItem>
