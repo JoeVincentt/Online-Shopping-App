@@ -2,6 +2,7 @@ import React from "react";
 
 import categoriesDB from "../db/categories";
 import cbdCatDB from "../db/productByCategory/cbd";
+import gummiesCatDB from "../db/productByCategory/gummies";
 
 //Create context
 export const ShopContext = React.createContext();
@@ -94,6 +95,7 @@ export class ShopContextProvider extends React.Component {
       setTimeout(
         () =>
           this.setState({
+            products: gummiesCatDB,
             loading: false
           }),
         1000

@@ -23,10 +23,10 @@ export default props => {
           />
           <Body>
             <Item style={{ justifyContent: "space-between" }}>
-              <View style={{ width: "80%" }}>
+              <View style={{ width: "70%" }}>
                 <TouchableOpacity onPress={() => setProductInfoModalOpen(true)}>
                   <TitleText style={{ fontSize: height * 0.03 }}>
-                    {truncateString(props.productName, 75)}
+                    {truncateString(props.productName, 100)}
                   </TitleText>
                 </TouchableOpacity>
               </View>
@@ -39,7 +39,7 @@ export default props => {
                   x{" "}
                 </ContentLightText>
                 <ContentBoldText style={{ fontSize: height * 0.025 }}>
-                  {props.productPrice} $
+                  {props.productPrice} ${"  "}
                 </ContentBoldText>
               </Item>
             </Item>
