@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Card } from "native-base";
+import { Card, Icon } from "native-base";
 import { View, Alert, ScrollView } from "react-native";
 import * as SecureStore from "expo-secure-store";
 
@@ -119,7 +119,14 @@ export default () => {
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-          <MarijuanaText> Empty </MarijuanaText>
+          <Icon
+            name="cart"
+            style={{ fontSize: 150, color: colors.secondary }}
+          />
+          <MarijuanaText style={{ fontSize: 100, color: colors.secondary }}>
+            {" "}
+            Empty{" "}
+          </MarijuanaText>
         </View>
       )}
     </View>

@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Card, Spinner } from "native-base";
+import { Card, Spinner, Icon } from "native-base";
 import { View, ScrollView } from "react-native";
 
 import { MarijuanaText } from "../StyledText";
 import FavoriteItem from "./FavoriteItem";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { CartContext } from "../../context/CartContext";
+import colors from "../../constants/Colors";
 
 export default () => {
   const [loading, setLoading] = useState(true);
@@ -60,7 +61,14 @@ export default () => {
               alignItems: "center"
             }}
           >
-            <MarijuanaText> Empty </MarijuanaText>
+            <Icon
+              style={{ fontSize: 150, color: colors.secondary }}
+              name="heart-empty"
+            />
+            <MarijuanaText style={{ fontSize: 100, color: colors.secondary }}>
+              {" "}
+              Empty{" "}
+            </MarijuanaText>
           </View>
         ) : (
           <ScrollView>{renderProducts()}</ScrollView>

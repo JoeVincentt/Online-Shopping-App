@@ -96,13 +96,16 @@ export default () => {
     return (
       <View
         style={{
-          flex: 1,
+          height: height * 0.8,
           justifyContent: "center",
           alignItems: "center",
           paddingTop: height * 0.025
         }}
       >
-        <MarijuanaText>Empty</MarijuanaText>
+        <MarijuanaText style={{ fontSize: 100, color: colors.secondary }}>
+          {" "}
+          Empty{" "}
+        </MarijuanaText>
       </View>
     );
   }

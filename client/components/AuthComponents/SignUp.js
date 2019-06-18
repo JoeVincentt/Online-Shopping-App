@@ -73,7 +73,7 @@ export default (SignUp = ({ switchBetweenAuthModes }) => {
   };
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
+    <>
       <Form>
         <View style={{ height: height * 0.02 }} />
         <View style={styles.inputLabel}>
@@ -171,7 +171,7 @@ export default (SignUp = ({ switchBetweenAuthModes }) => {
         </Item>
       </Form>
       <SimpleButton onPress={signUp} text="Sign Up" />
-    </KeyboardAvoidingView>
+    </>
   );
 });
 

@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     paddingLeft: 15,
-    minHeight: 50,
-    maxHeight: 100,
+    minHeight: height * 0.1,
+    maxHeight: height * 0.4,
     fontSize: height * 0.03,
     fontFamily: "sans-light"
   },

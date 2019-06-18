@@ -3,11 +3,16 @@ import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FooterTab } from "native-base";
 
 import NavigationTab from "../components/NavigationTab";
+import NavigationRotes from "../navigation/NavigationRoutes";
 import colors from "../constants/Colors";
 
 import { CartContext } from "../context/CartContext";
+import { NavigationContext } from "../context/NavigationContext";
+import { UserProfileContext } from "../context/UserProfileContext";
 
 export default (TabNavigation = props => {
+  const { loggedIn, navigation, activeTab } = useContext(NavigationContext);
+  const { signedIn } = useContext(UserProfileContext);
   const { cartItems } = useContext(CartContext);
   return (
     <FooterTab
@@ -17,49 +22,49 @@ export default (TabNavigation = props => {
         backgroundColor: colors.defaultBackgroundColor
       }}
     >
-      {props.loggedIn ? (
+      {loggedIn && signedIn ? (
         <NavigationTab
-          onPress={props.onPress}
-          navigateTo="profile"
+          onPress={navigation}
+          navigateTo={NavigationRotes.PROFILE}
           iconName="person"
           tabText="Profile"
-          active={props.activeTab === "profile" ? true : false}
+          active={activeTab === NavigationRotes.PROFILE ? true : false}
         />
       ) : (
         <NavigationTab
-          onPress={props.onPress}
-          navigateTo="auth"
+          onPress={navigation}
+          navigateTo={NavigationRotes.AUTHENTICATION}
           iconName="log-in"
           tabText="Sign In"
-          active={props.activeTab === "auth" ? true : false}
+          active={activeTab === NavigationRotes.AUTHENTICATION ? true : false}
         />
       )}
 
       <NavigationTab
-        onPress={props.onPress}
-        navigateTo="shop"
+        onPress={navigation}
+        navigateTo={NavigationRotes.SHOP}
         iconName="basket"
         tabText="Shop"
-        active={props.activeTab === "shop" ? true : false}
+        active={activeTab === NavigationRotes.SHOP ? true : false}
       />
 
-      {props.loggedIn && (
+      {loggedIn && signedIn && (
         <>
           <NavigationTab
-            onPress={props.onPress}
-            navigateTo="favorite"
+            onPress={navigation}
+            navigateTo={NavigationRotes.FAVORITE}
             iconName="heart"
             tabText="Favorite"
-            active={props.activeTab === "favorite" ? true : false}
+            active={activeTab === NavigationRotes.FAVORITE ? true : false}
           />
           <NavigationTab
-            onPress={props.onPress}
+            onPress={navigation}
             cartLength={cartItems.length > 0 ? cartItems.length : null}
             cartItems={cartItems}
-            navigateTo="cart"
+            navigateTo={NavigationRotes.CART}
             iconName="cart"
             tabText="Cart"
-            active={props.activeTab === "cart" ? true : false}
+            active={activeTab === NavigationRotes.CART ? true : false}
           />
         </>
       )}

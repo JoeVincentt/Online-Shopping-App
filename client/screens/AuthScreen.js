@@ -8,6 +8,7 @@ import {
 } from "../components/StyledText";
 import SignIn from "../components/AuthComponents/SignIn";
 import SignUp from "../components/AuthComponents/SignUp";
+import { height } from "../constants/Layout";
 
 export default class AuthScreen extends Component {
   state = {
@@ -27,7 +28,13 @@ export default class AuthScreen extends Component {
 
   render() {
     return (
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: "space-between",
+          height: height * 1
+        }}
+      >
         <View style={{ paddingHorizontal: 30 }}>{this.renderComponent()}</View>
 
         <View style={styles.switchTextContainer}>

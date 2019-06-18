@@ -5,6 +5,7 @@ import { View, KeyboardAvoidingView } from "react-native";
 import { TitleText } from "../StyledText";
 import SimpleButton from "../Buttons/SimpleButton";
 import colors from "../../constants/Colors";
+import { height } from "../../constants/Layout";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { UIContext } from "../../context/UIContext";
 export default props => {
@@ -33,7 +34,11 @@ export default props => {
   };
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
+    <KeyboardAvoidingView
+      style={{ flex: 1, height: height * 1 }}
+      behavior="padding"
+      enabled
+    >
       <View style={{ alignSelf: "flex-start", paddingTop: 20 }}>
         <TitleText>Account</TitleText>
       </View>
